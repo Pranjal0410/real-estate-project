@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn clean:*)",
+      "Bash(cat:*)",
+      "Bash(mvn compile:*)",
+      "Bash(mvn test-compile:*)",
+      "Bash(mvn:*)",
+      "Bash(java:*)",
+      "Bash(curl:*)",
+      "Bash(taskkill:*)",
+      "Bash(ren:*)",
+      "Bash(mv:*)",
+      "Bash(dir)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

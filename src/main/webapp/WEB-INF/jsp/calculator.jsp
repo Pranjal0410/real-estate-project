@@ -8,11 +8,13 @@
     <title>Investment Calculator - Real Estate Platform</title>
     <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet">
+    <link href="/css/magicbricks-exact.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <div id="scrollProgress"></div>
-    <jsp:include page="includes/navbar.jsp"/>
+    <jsp:include page="includes/navbar-real.jsp"/>
     
     <div class="container mt-5" data-aos="fade-up">
         <h1 class="text-center mb-4">Investment Calculator</h1>
@@ -155,6 +157,11 @@
         $('#calculatorForm').on('submit', function(e) {
             e.preventDefault();
             
+            // Clear previous errors
+            $('.form-control').removeClass('is-invalid');
+            $('.invalid-feedback').remove();
+            
+            // Get form values
             const propertyPrice = parseFloat($('#propertyPrice').val());
             const downPayment = parseFloat($('#downPayment').val()) / 100;
             const loanRate = parseFloat($('#loanRate').val());
@@ -163,94 +170,167 @@
             const annualExpenses = parseFloat($('#annualExpenses').val()) || 0;
             const appreciationRate = parseFloat($('#appreciationRate').val());
             
+            // Validate inputs
+            let hasErrors = false;
+            
+            if (!propertyPrice || propertyPrice <= 0) {
+                showFieldError('#propertyPrice', 'Property price must be greater than 0');
+                hasErrors = true;
+            }
+            
+            if (!monthlyRental || monthlyRental <= 0) {
+                showFieldError('#monthlyRental', 'Monthly rental must be greater than 0');
+                hasErrors = true;
+            }
+            
+            if (downPayment < 0 || downPayment > 1) {
+                showFieldError('#downPayment', 'Down payment must be between 0 and 100%');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) return;
+            
+            // Show loading state
+            const submitBtn = $(this).find('button[type="submit"]');
+            const originalText = submitBtn.html();
+            submitBtn.addClass('loading').prop('disabled', true);
+            
             const loanAmount = propertyPrice * (1 - downPayment);
             
-            // Calculate mortgage payment
+            // Use the calculate endpoint
+            const requestData = {
+                propertyPrice: propertyPrice,
+                downPaymentPercentage: downPayment * 100,
+                interestRate: loanRate,
+                loanTermYears: loanTerm,
+                monthlyRental: monthlyRental,
+                annualExpenses: annualExpenses,
+                appreciationRate: appreciationRate
+            };
+            
+            // Calculate using individual endpoints for compatibility
+            const monthlyExpenses = annualExpenses / 12;
+            
+            // Calculate mortgage payment first
             $.get('/api/investments/mortgage', {
                 loanAmount: loanAmount,
                 annualRate: loanRate,
                 months: loanTerm * 12
-            }).done(function(mortgageResponse) {
+            }).then(function(mortgageResponse) {
                 const monthlyPayment = mortgageResponse.data;
                 
-                // Calculate ROI
-                $.get('/api/investments/roi', {
-                    propertyPrice: propertyPrice,
-                    monthlyRental: monthlyRental,
-                    annualExpenses: annualExpenses
-                }).done(function(roiResponse) {
-                    const roi = roiResponse.data;
-                    
-                    // Calculate Rental Yield
+                // Calculate all metrics in parallel
+                const promises = [
+                    $.get('/api/investments/roi', {
+                        propertyPrice: propertyPrice,
+                        monthlyRental: monthlyRental,
+                        annualExpenses: annualExpenses
+                    }),
                     $.get('/api/investments/rental-yield', {
                         propertyPrice: propertyPrice,
                         monthlyRental: monthlyRental
-                    }).done(function(yieldResponse) {
-                        const rentalYield = yieldResponse.data;
-                        
-                        // Calculate Cap Rate
-                        $.get('/api/investments/cap-rate', {
-                            propertyPrice: propertyPrice,
-                            monthlyRental: monthlyRental,
-                            annualExpenses: annualExpenses
-                        }).done(function(capRateResponse) {
-                            const capRate = capRateResponse.data;
-                            
-                            // Calculate Cash Flow
-                            const monthlyExpenses = annualExpenses / 12;
-                            const cashFlow = monthlyRental - monthlyPayment - monthlyExpenses;
-                            
-                            // Calculate Break Even
-                            $.get('/api/investments/break-even', {
-                                propertyPrice: propertyPrice,
-                                monthlyRental: monthlyRental,
-                                annualExpenses: annualExpenses
-                            }).done(function(breakEvenResponse) {
-                                const breakEven = breakEvenResponse.data;
-                                
-                                // Calculate Appreciation
-                                $.get('/api/investments/appreciation', {
-                                    initialValue: propertyPrice,
-                                    appreciationRate: appreciationRate,
-                                    years: 5
-                                }).done(function(appreciationResponse) {
-                                    const futureValue = appreciationResponse.data;
-                                    
-                                    // Display results
-                                    $('#loanAmount').text(loanAmount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                                    $('#monthlyPayment').text(monthlyPayment.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                                    $('#roi').text(roi.toFixed(2));
-                                    $('#rentalYield').text(rentalYield.toFixed(2));
-                                    $('#capRate').text(capRate.toFixed(2));
-                                    $('#cashFlow').text(cashFlow.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                                    $('#breakEven').text(breakEven.toFixed(1));
-                                    $('#futureValue').text(futureValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                                    
-                                    // Generate recommendation
-                                    let recommendation = "";
-                                    if (roi > 8 && cashFlow > 0) {
-                                        recommendation = "Excellent investment opportunity with strong ROI and positive cash flow!";
-                                        $('#recommendation').removeClass('alert-warning alert-danger').addClass('alert-success');
-                                    } else if (roi > 5 && cashFlow >= 0) {
-                                        recommendation = "Good investment with decent returns and break-even or positive cash flow.";
-                                        $('#recommendation').removeClass('alert-danger alert-success').addClass('alert-info');
-                                    } else if (cashFlow < 0) {
-                                        recommendation = "Warning: Negative cash flow. Consider negotiating price or increasing rental income.";
-                                        $('#recommendation').removeClass('alert-success alert-info').addClass('alert-warning');
-                                    } else {
-                                        recommendation = "Low returns. This may not be an ideal investment opportunity.";
-                                        $('#recommendation').removeClass('alert-success alert-info').addClass('alert-danger');
-                                    }
-                                    $('#recommendationText').text(recommendation);
-                                    
-                                    $('#emptyResults').hide();
-                                    $('#resultsSection').show();
-                                });
-                            });
-                        });
-                    });
+                    }),
+                    $.get('/api/investments/cap-rate', {
+                        propertyPrice: propertyPrice,
+                        monthlyRental: monthlyRental,
+                        annualExpenses: annualExpenses
+                    }),
+                    $.get('/api/investments/break-even', {
+                        propertyPrice: propertyPrice,
+                        monthlyRental: monthlyRental,
+                        annualExpenses: annualExpenses
+                    }),
+                    $.get('/api/investments/appreciation', {
+                        initialValue: propertyPrice,
+                        appreciationRate: appreciationRate,
+                        years: 5
+                    })
+                ];
+                
+                Promise.all(promises).then(function(responses) {
+                    const [roiResp, yieldResp, capRateResp, breakEvenResp, appreciationResp] = responses;
+                    
+                    // Calculate cash flow
+                    const cashFlow = monthlyRental - monthlyPayment - monthlyExpenses;
+                    
+                    // Display results
+                    $('#loanAmount').text(formatCurrency(loanAmount));
+                    $('#monthlyPayment').text(formatCurrency(monthlyPayment));
+                    $('#roi').text(roiResp.data.toFixed(2));
+                    $('#rentalYield').text(yieldResp.data.toFixed(2));
+                    $('#capRate').text(capRateResp.data.toFixed(2));
+                    $('#cashFlow').text(formatCurrency(cashFlow));
+                    $('#breakEven').text(breakEvenResp.data.toFixed(1));
+                    $('#futureValue').text(formatCurrency(appreciationResp.data));
+                    
+                    // Generate recommendation
+                    let recommendation = "";
+                    const roi = roiResp.data;
+                    
+                    if (roi > 8 && cashFlow > 0) {
+                        recommendation = "Excellent investment opportunity with strong ROI and positive cash flow!";
+                        $('#recommendation').removeClass('alert-warning alert-danger').addClass('alert-success');
+                    } else if (roi > 5 && cashFlow >= 0) {
+                        recommendation = "Good investment with decent returns and break-even or positive cash flow.";
+                        $('#recommendation').removeClass('alert-danger alert-success').addClass('alert-info');
+                    } else if (cashFlow < 0) {
+                        recommendation = "Warning: Negative cash flow. Consider negotiating price or increasing rental income.";
+                        $('#recommendation').removeClass('alert-success alert-info').addClass('alert-warning');
+                    } else {
+                        recommendation = "Low returns. This may not be an ideal investment opportunity.";
+                        $('#recommendation').removeClass('alert-success alert-info').addClass('alert-danger');
+                    }
+                    $('#recommendationText').text(recommendation);
+                    
+                    $('#emptyResults').hide();
+                    $('#resultsSection').show();
+                    
+                }).catch(function(error) {
+                    console.error('Calculation error:', error);
+                    showAlert('Some calculations failed. Please try again.', 'warning');
                 });
+                
+            }).catch(function(error) {
+                console.error('Mortgage calculation failed:', error);
+                showAlert('Calculation failed. Please check your inputs and try again.', 'danger');
+            }).always(function() {
+                // Reset button
+                submitBtn.removeClass('loading').prop('disabled', false).html(originalText);
             });
+        });
+        
+        // Helper functions
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        function showFieldError(fieldSelector, message) {
+            const field = $(fieldSelector);
+            field.addClass('is-invalid');
+            if (field.siblings('.invalid-feedback').length === 0) {
+                field.after(`<div class="invalid-feedback">${message}</div>`);
+            }
+        }
+        
+        function showAlert(message, type) {
+            const alertHtml = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            $('#resultsSection').prepend(alertHtml);
+        }
+        
+        // Clear errors on input
+        $('.form-control').on('input', function() {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').remove();
         });
     });
     </script>

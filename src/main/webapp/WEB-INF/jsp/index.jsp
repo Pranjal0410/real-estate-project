@@ -12,45 +12,102 @@
     
     <title>PropInvest - Smart Real Estate Investment Platform</title>
     
-    <!-- Bootstrap 5 CSS -->
-    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
     
+    <!-- Google Fonts for Shadcn-style typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <!-- Custom CSS -->
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/magicbricks-exact.css" rel="stylesheet">
+    <link href="/css/shadcn-enhanced.css" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-    <!-- Google Fonts Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div id="scrollProgress"></div>
-    <!-- Include Navigation -->
-    <jsp:include page="includes/navbar.jsp"/>
+    <!-- Include Magicbricks-Style Navigation -->
+    <jsp:include page="includes/navbar-real.jsp"/>
     
-    <!-- 🚀 ULTRA MODERN HERO SECTION -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Smart Real Estate Investment Platform</h1>
-            <p class="hero-subtitle">
-                Discover smart investment opportunities with AI-powered analytics and comprehensive market insights. 
-                Make informed decisions with our cutting-edge platform and join thousands of successful investors.
-            </p>
-            
-            <!-- Hero Action Buttons -->
-            <div class="hero-buttons">
-                <a href="/properties" class="btn btn-hero-primary">
-                    <i class="bi bi-search me-2"></i>Browse Properties
-                </a>
-                <a href="/calculator" class="btn btn-hero-secondary">
-                    <i class="bi bi-calculator me-2"></i>Investment Calculator
-                </a>
+    <!-- 🚀 ENHANCED HERO SECTION -->
+    <section class="hero">
+        <div class="container-center">
+            <div class="hero-content">
+                <h1 class="hero-title animate-fadeInUp">
+                    Find Your Perfect Property
+                </h1>
+                <p class="hero-subtitle animate-fadeInUp" style="animation-delay: 0.2s;">
+                    Discover premium real estate opportunities with AI-powered insights. 
+                    Buy, sell, or rent properties with confidence on India's leading platform.
+                </p>
+                
+                <!-- Enhanced Search Bar -->
+                <div class="hero-search animate-fadeInUp" style="animation-delay: 0.4s;">
+                    <form class="row g-3" action="/properties" method="get" novalidate>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="form-group">
+                                <label for="searchLocation" class="form-label">
+                                    <i class="bi bi-geo-alt-fill me-2"></i>Location
+                                </label>
+                                <input type="text" class="form-input" id="searchLocation" name="location" 
+                                       placeholder="Enter city or locality">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="form-group">
+                                <label for="propertyType" class="form-label">
+                                    <i class="bi bi-buildings me-2"></i>Property Type
+                                </label>
+                                <select class="form-input form-select" id="propertyType" name="type">
+                                    <option value="">All Types</option>
+                                    <option value="APARTMENT">Apartment</option>
+                                    <option value="HOUSE">Independent House</option>
+                                    <option value="VILLA">Villa</option>
+                                    <option value="PLOT">Plot/Land</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="form-group">
+                                <label for="budget" class="form-label">
+                                    <i class="bi bi-currency-rupee me-2"></i>Budget
+                                </label>
+                                <select class="form-input form-select" id="budget" name="budget">
+                                    <option value="">Any Budget</option>
+                                    <option value="0-2500000">Under ₹25 Lakh</option>
+                                    <option value="2500000-5000000">₹25 - ₹50 Lakh</option>
+                                    <option value="5000000-7500000">₹50 - ₹75 Lakh</option>
+                                    <option value="7500000-10000000">₹75 Lakh - ₹1 Cr</option>
+                                    <option value="10000000+">Above ₹1 Cr</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">&nbsp;</label>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-search me-2"></i>Search Properties
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Quick Action Buttons -->
+                    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                        <a href="/properties?featured=true" class="btn btn-outline btn-sm">
+                            <i class="bi bi-star me-2"></i>Featured
+                        </a>
+                        <a href="/calculator" class="btn btn-outline btn-sm">
+                            <i class="bi bi-calculator me-2"></i>Calculator
+                        </a>
+                        <a href="/chatbot" class="btn btn-outline btn-sm">
+                            <i class="bi bi-robot me-2"></i>AI Assistant
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -187,7 +244,7 @@
     </section>
     
     <!-- 🏠 FEATURED PROPERTIES SECTION -->
-    <section class="properties-section section-alt" data-aos="fade-up">
+    <section class="properties-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up">
@@ -198,21 +255,21 @@
                 </div>
             </div>
             
-            <div class="properties-grid mb-5">
+            <div class="row g-4 mb-5">
                 <c:choose>
                     <c:when test="${not empty properties}">
                         <c:forEach items="${properties}" var="property" varStatus="status">
-                            <c:if test="${status.index < 12}">
-                                <div data-aos="fade-up" data-aos-delay="${status.index * 50}">
-                                    <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
+                            <c:if test="${status.index < 6}">
+                                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="${status.index * 100}">
+                                    <div class="property-card">
                                         <!-- Property Image -->
                                         <div class="property-image">
                                             <c:choose>
                                                 <c:when test="${not empty property.imageUrl}">
-                                                    <img src="${property.imageUrl}" alt="${property.title}" loading="lazy">
+                                                    <img src="${property.imageUrl}" alt="${property.title}">
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <img src="https://source.unsplash.com/400x250/?${property.propertyType != null ? property.propertyType.toLowerCase() : 'house'},property" alt="${property.title}" loading="lazy">
+                                                    <img src="https://source.unsplash.com/400x250/?${property.propertyType != null ? property.propertyType.toLowerCase() : 'house'},property" alt="${property.title}">
                                                 </c:otherwise>
                                             </c:choose>
                                             <!-- Property Type Badge -->
@@ -231,7 +288,7 @@
                                             
                                             <!-- Price -->
                                             <div class="property-price">
-                                                $<fmt:formatNumber value="${property.price}" pattern=",###"/>
+                                                $<fmt:formatNumber value="${property.price}" pattern="#,###"/>
                                             </div>
                                             
                                             <!-- Property Features -->
@@ -248,7 +305,7 @@
                                                 </c:if>
                                                 <c:if test="${property.area != null && property.area > 0}">
                                                     <span class="feature-badge">
-                                                        <i class="bi bi-rulers me-1"></i><fmt:formatNumber value="${property.area}" pattern=",###"/> sq ft
+                                                        <i class="bi bi-rulers me-1"></i><fmt:formatNumber value="${property.area}" pattern="#,###"/> sq ft
                                                     </span>
                                                 </c:if>
                                             </div>
@@ -264,11 +321,11 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <!-- Demo Properties when no data available - 12 Properties in 3 columns -->
-                        <div data-aos="fade-up">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
+                        <!-- Demo Properties when no data available -->
+                        <div class="col-xl-4 col-lg-6" data-aos="fade-up">
+                            <div class="property-card">
                                 <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?luxury,villa" alt="Modern Luxury Villa" loading="lazy">
+                                    <img src="https://source.unsplash.com/400x250/?luxury,villa" alt="Modern Luxury Villa">
                                     <div class="property-badge">Villa</div>
                                 </div>
                                 <div class="property-content">
@@ -289,10 +346,10 @@
                             </div>
                         </div>
                         
-                        <div data-aos="fade-up" data-aos-delay="50">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
+                        <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="property-card">
                                 <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?penthouse,apartment" alt="Downtown Penthouse" loading="lazy">
+                                    <img src="https://source.unsplash.com/400x250/?penthouse,apartment" alt="Downtown Penthouse">
                                     <div class="property-badge">Penthouse</div>
                                 </div>
                                 <div class="property-content">
@@ -313,10 +370,10 @@
                             </div>
                         </div>
                         
-                        <div data-aos="fade-up" data-aos-delay="100">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
+                        <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="property-card">
                                 <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?suburban,family,house" alt="Family Suburban Home" loading="lazy">
+                                    <img src="https://source.unsplash.com/400x250/?suburban,family,house" alt="Family Suburban Home">
                                     <div class="property-badge">House</div>
                                 </div>
                                 <div class="property-content">
@@ -329,201 +386,6 @@
                                         <span class="feature-badge"><i class="bi bi-door-open me-1"></i>4 Beds</span>
                                         <span class="feature-badge"><i class="bi bi-droplet me-1"></i>3 Baths</span>
                                         <span class="feature-badge"><i class="bi bi-rulers me-1"></i>2,800 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Row 2 -->
-                        <div data-aos="fade-up" data-aos-delay="150">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?condo,modern" alt="Modern Condo" loading="lazy">
-                                    <div class="property-badge">Condo</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Modern Waterfront Condo</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Miami, FL
-                                    </div>
-                                    <div class="property-price">$950,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>2 Beds</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>2 Baths</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>1,500 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div data-aos="fade-up" data-aos-delay="200">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?loft,industrial" alt="Industrial Loft" loading="lazy">
-                                    <div class="property-badge">Loft</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Industrial Loft</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Brooklyn, NY
-                                    </div>
-                                    <div class="property-price">$1,200,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>1 Bed</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>1 Bath</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>1,800 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div data-aos="fade-up" data-aos-delay="250">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?townhouse,modern" alt="Modern Townhouse" loading="lazy">
-                                    <div class="property-badge">Townhouse</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Modern Townhouse</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>San Francisco, CA
-                                    </div>
-                                    <div class="property-price">$1,750,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>3 Beds</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>3 Baths</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>2,200 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Row 3 -->
-                        <div data-aos="fade-up" data-aos-delay="300">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?mansion,estate" alt="Luxury Estate" loading="lazy">
-                                    <div class="property-badge">Estate</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Luxury Estate</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Malibu, CA
-                                    </div>
-                                    <div class="property-price">$5,200,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>7 Beds</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>8 Baths</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>8,500 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div data-aos="fade-up" data-aos-delay="350">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?studio,apartment" alt="Urban Studio" loading="lazy">
-                                    <div class="property-badge">Studio</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Urban Studio</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Seattle, WA
-                                    </div>
-                                    <div class="property-price">$425,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>Studio</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>1 Bath</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>650 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div data-aos="fade-up" data-aos-delay="400">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?cottage,cozy" alt="Cozy Cottage" loading="lazy">
-                                    <div class="property-badge">Cottage</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Cozy Mountain Cottage</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Denver, CO
-                                    </div>
-                                    <div class="property-price">$575,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>2 Beds</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>1 Bath</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>1,200 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Row 4 -->
-                        <div data-aos="fade-up" data-aos-delay="450">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?duplex,modern" alt="Modern Duplex" loading="lazy">
-                                    <div class="property-badge">Duplex</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Modern Duplex</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Phoenix, AZ
-                                    </div>
-                                    <div class="property-price">$725,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>3 Beds</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>2 Baths</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>1,950 sq ft</span>
-                                    </div>
-                                    <a href="/properties" class="btn btn-property">
-                                        <i class="bi bi-eye me-2"></i>View Details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div data-aos="fade-up" data-aos-delay="500">
-                            <div class="property-card" data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
-                                <div class="property-image">
-                                    <img src="https://source.unsplash.com/400x250/?bungalow,charming" alt="Charming Bungalow" loading="lazy">
-                                    <div class="property-badge">Bungalow</div>
-                                </div>
-                                <div class="property-content">
-                                    <h5 class="property-title">Charming Bungalow</h5>
-                                    <div class="property-location">
-                                        <i class="bi bi-geo-alt-fill"></i>Portland, OR
-                                    </div>
-                                    <div class="property-price">$485,000</div>
-                                    <div class="property-features">
-                                        <span class="feature-badge"><i class="bi bi-door-open me-1"></i>2 Beds</span>
-                                        <span class="feature-badge"><i class="bi bi-droplet me-1"></i>1 Bath</span>
-                                        <span class="feature-badge"><i class="bi bi-rulers me-1"></i>1,100 sq ft</span>
                                     </div>
                                     <a href="/properties" class="btn btn-property">
                                         <i class="bi bi-eye me-2"></i>View Details
@@ -598,11 +460,11 @@
             </div>
         </div>
     </section>
-
-    <!-- 🚀 INVESTMENT CALCULATOR CTA SECTION -->
-    <section class="cta-section" data-aos="fade-up">
+    
+    <!-- 🚀 CTA SECTION -->
+    <section class="cta-section">
         <div class="container">
-            <div class="cta-content">
+            <div class="cta-content" data-aos="fade-up">
                 <h2 class="cta-title">Ready to Start Your Investment Journey?</h2>
                 <p class="cta-subtitle">
                     Join thousands of successful investors who trust PropInvest for their real estate investment needs. 
@@ -648,82 +510,30 @@
             </div>
         </div>
     </section>
-
-    <!-- 🤖 AI ASSISTANT PROMO SECTION -->
-    <section class="features-section" data-aos="fade-up">
-        <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-6">
-                    <div class="rounded-custom shadow-custom overflow-hidden" data-tilt data-tilt-max="5" data-tilt-speed="400">
-                        <div id="lottie-ai" style="width:100%;height:400px;background:linear-gradient(135deg, rgba(37,99,235,.05), rgba(29,78,216,.05));"></div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h3 class="h2 mb-3">Meet Your AI Investment Assistant</h3>
-                    <p class="lead mb-4">Ask questions, get property recommendations, and make smarter decisions faster.</p>
-                    <a class="btn btn-primary btn-lg" href="/chatbot">
-                        <i class="bi bi-robot me-2"></i> Chat with AI
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
     
     <!-- Include Footer -->
     <jsp:include page="includes/footer.jsp"/>
     
-    <!-- Scripts -->
-    <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS (Animate on Scroll) -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
-    </script>
-
-    <!-- VanillaTilt for parallax tilt -->
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
-    <script>
-        if (window.VanillaTilt) {
-            VanillaTilt.init(document.querySelectorAll('[data-tilt]'));
-        }
-    </script>
-
-    <!-- Lottie for subtle animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lottieContainer = document.getElementById('lottie-ai');
-            if (lottieContainer && window.lottie) {
-                window.lottie.loadAnimation({
-                    container: lottieContainer,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: 'https://assets6.lottiefiles.com/private_files/lf30_mznpvt7n.json'
-                });
-            }
-        });
-    </script>
+    <!-- Scripts from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     
     <!-- Custom JavaScript -->
     <script>
         // Animated Counter Function
         function animateCounter(element, start, end, duration) {
-            const startTime = performance.now();
-            const formatter = new Intl.NumberFormat('en-US');
-            function easeOutQuad(t) { return t * (2 - t); }
-            function frame(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(1, elapsed / duration);
-                const eased = easeOutQuad(progress);
-                const value = Math.round(start + (end - start) * eased);
-                element.textContent = formatter.format(value);
-                if (progress < 1) requestAnimationFrame(frame);
-            }
-            requestAnimationFrame(frame);
+            let current = start;
+            const range = end - start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = current.toLocaleString();
+                if (current === end) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
         }
         
         // Initialize counters when they come into view
@@ -780,7 +590,9 @@
                         entry.target.classList.add('animate');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
             
             document.querySelectorAll('[data-aos]').forEach(el => {
                 el.classList.add('animate-on-scroll');
@@ -796,27 +608,14 @@
             initScrollAnimations();
             
             // Add loading complete class for final animations
-            setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100);
         });
-
-        // Scroll progress bar
-        (function() {
-            const bar = document.getElementById('scrollProgress');
-            if (!bar) return;
-            const update = () => {
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const width = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-                bar.style.width = width + '%';
-            };
-            window.addEventListener('scroll', update);
-            window.addEventListener('resize', update);
-            update();
-        })();
         
         // Preload hero background image
         const heroImg = new Image();
-        heroImg.src = 'https://source.unsplash.com/1600x900/?luxury-house,architecture,city';
+        heroImg.src = 'https://source.unsplash.com/1600x900/?real-estate,city';
         
         // Form validation helpers
         function validateEmail(email) {
@@ -824,19 +623,27 @@
             return re.test(email);
         }
         
-        // Utility functions
+        // Add some utility functions for future use
         window.PropInvest = {
             utils: {
                 formatCurrency: function(amount) {
-                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+                    return new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                    }).format(amount);
                 },
+                
                 formatNumber: function(number) {
                     return new Intl.NumberFormat('en-US').format(number);
                 },
+                
                 debounce: function(func, wait) {
                     let timeout;
                     return function executedFunction(...args) {
-                        const later = () => { clearTimeout(timeout); func(...args); };
+                        const later = () => {
+                            clearTimeout(timeout);
+                            func(...args);
+                        };
                         clearTimeout(timeout);
                         timeout = setTimeout(later, wait);
                     };
@@ -847,26 +654,5 @@
     
     <!-- Include main.js if it exists -->
     <script src="/js/main.js" onerror="console.log('main.js not found, using inline scripts only')"></script>
-
-    <!-- Back to Top Button -->
-    <button id="backToTop" aria-label="Back to top" title="Back to top">
-        <i class="bi bi-arrow-up"></i>
-    </button>
-
-    <script>
-        (function() {
-            const btn = document.getElementById('backToTop');
-            const toggleBtn = () => {
-                if (window.scrollY > 400) {
-                    btn.classList.add('show');
-                } else {
-                    btn.classList.remove('show');
-                }
-            };
-            window.addEventListener('scroll', toggleBtn);
-            btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            toggleBtn();
-        })();
-    </script>
 </body>
 </html>

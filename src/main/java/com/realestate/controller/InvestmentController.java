@@ -37,7 +37,6 @@ public class InvestmentController {
     }
 
     @PostMapping("/analyze/{propertyId}")
-    @PreAuthorize("isAuthenticated()")
     public CompletableFuture<ResponseEntity<ApiResponse<Map<String, BigDecimal>>>> analyzeInvestment(
             @PathVariable Long propertyId,
             @Valid @RequestBody InvestmentRequestDTO request) {

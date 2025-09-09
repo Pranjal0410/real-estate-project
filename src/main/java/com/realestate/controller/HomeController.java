@@ -103,4 +103,51 @@ public class HomeController {
     public String propertiesTypo() {
         return "redirect:/properties";
     }
+    
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        try {
+            model.addAttribute("user", userService.getCurrentUser());
+            return "profile";
+        } catch (Exception e) {
+            return "redirect:/login";
+        }
+    }
+    
+    @GetMapping("/favorites")
+    public String favorites(Model model) {
+        try {
+            model.addAttribute("user", userService.getCurrentUser());
+            // Add favorites logic here when implemented
+            model.addAttribute("properties", propertyService.findAll());
+            return "favorites";
+        } catch (Exception e) {
+            return "redirect:/login";
+        }
+    }
+    
+    @GetMapping("/forgot-password")
+    public String forgotPassword() {
+        return "forgot-password";
+    }
+    
+    @GetMapping("/sell/property")
+    public String sellProperty(Model model) {
+        try {
+            model.addAttribute("user", userService.getCurrentUser());
+            return "sell-property";
+        } catch (Exception e) {
+            return "redirect:/login";
+        }
+    }
+    
+    @GetMapping("/shortlist")
+    public String shortlist(Model model) {
+        try {
+            model.addAttribute("user", userService.getCurrentUser());
+            return "shortlist";
+        } catch (Exception e) {
+            return "redirect:/login";
+        }
+    }
 }

@@ -16,6 +16,8 @@
     
     <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet">
+    <link href="/css/magicbricks-exact.css" rel="stylesheet">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +26,7 @@
     <div id="scrollProgress"></div>
     
     <!-- Include Navigation -->
-    <jsp:include page="includes/navbar.jsp"/>
+    <jsp:include page="includes/navbar-real.jsp"/>
     
     <!-- Hero Section -->
     <section class="hero-section" style="min-height: 60vh;">

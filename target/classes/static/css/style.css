@@ -167,7 +167,7 @@ p {
     color: var(--gray-600);
 }
 
-/* 🔥 ULTRA MODERN DARK NAVBAR - HORIZONTAL ONLY */
+/* 🔥 ULTRA MODERN HORIZONTAL NAVBAR - ALWAYS HORIZONTAL */
 .navbar {
     background: rgba(10, 14, 26, 0.95) !important;
     backdrop-filter: blur(25px);
@@ -179,6 +179,33 @@ p {
     width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    display: flex !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Horizontal Navigation Links */
+.nav-link-horizontal {
+    color: var(--gray-800) !important;
+    text-decoration: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.nav-link-horizontal:hover {
+    color: var(--primary) !important;
+    background: rgba(16, 185, 129, 0.1);
+    transform: translateY(-1px);
+}
+
+.nav-link-horizontal.active {
+    color: var(--primary) !important;
+    font-weight: 600;
+    background: rgba(16, 185, 129, 0.15);
 }
 
 .navbar.scrolled {
@@ -225,50 +252,27 @@ p {
     background: rgba(16, 185, 129, 0.12);
 }
 
-/* Force horizontal menu on desktop - Enhanced */
-@media (min-width: 992px) {
-    #navbarNav {
-        display: flex !important;
-        flex-basis: auto !important;
+/* Horizontal Navbar - All Screen Sizes */
+@media (max-width: 768px) {
+    .nav-link-horizontal {
+        font-size: var(--text-sm);
+        padding: var(--space-xs) var(--space-sm);
     }
-    #navbarNav .navbar-nav {
-        flex-direction: row !important;
-        align-items: center;
-    }
-    .navbar-collapse {
-        justify-content: space-between;
-    }
-    .navbar-nav .nav-item {
-        margin: 0 var(--space-xs);
+    .nav-link-horizontal i {
+        display: none;
     }
 }
 
-/* Mobile responsive navbar */
-@media (max-width: 991px) {
-    .navbar-collapse {
-        background: rgba(10, 14, 26, 0.98);
-        border-radius: var(--radius-lg);
-        padding: var(--space-lg);
-        margin-top: var(--space-md);
-        border: 1px solid rgba(148,163,184,0.15);
-        box-shadow: var(--shadow-xl);
+@media (max-width: 576px) {
+    .navbar .container-fluid > div:nth-child(2) .d-flex {
+        gap: 1rem !important;
     }
-    .navbar-nav .nav-link {
-        padding: var(--space-md) var(--space-lg) !important;
-        border-bottom: 1px solid rgba(148,163,184,0.08);
-        border-radius: var(--radius-md);
-        margin-bottom: var(--space-xs);
+    .nav-link-horizontal {
+        font-size: var(--text-xs);
+        padding: var(--space-xs);
     }
-    .navbar-nav .nav-link:last-child {
-        border-bottom: none;
-    }
-    .navbar-toggler {
-        padding: var(--space-sm);
-        border: 1px solid rgba(148,163,184,0.3);
-        border-radius: var(--radius-md);
-    }
-    .navbar-toggler:focus {
-        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    .navbar-brand span {
+        display: none;
     }
 }
 
@@ -473,10 +477,44 @@ p {
     letter-spacing: 0.05em;
 }
 
-/* 🏠 MODERN PROPERTY CARDS */
+/* 🏠 MODERN PROPERTY CARDS - 3 COLUMN GRID */
 .properties-section {
     padding: var(--space-5xl) 0;
     background: linear-gradient(180deg, rgba(15,23,42,1) 0%, rgba(2,6,23,1) 100%);
+}
+
+/* Ensure proper grid layout for properties */
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-xl);
+    align-items: stretch;
+}
+
+/* Force 3 columns on larger screens */
+@media (min-width: 1200px) {
+    .properties-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .properties-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .properties-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .properties-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .property-card {
@@ -1364,4 +1402,106 @@ footer {
         transition: none !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* 🎯 MEGA DROPDOWN STYLES */
+.mega-dropdown {
+    width: 600px !important;
+    padding: 1.5rem !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 12px !important;
+    margin-top: 0.5rem !important;
+}
+
+.mega-dropdown .row {
+    margin: 0;
+}
+
+.mega-dropdown .col-md-3 {
+    padding: 0 0.75rem;
+}
+
+.mega-dropdown .dropdown-header {
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.mega-dropdown .dropdown-item {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.mega-dropdown .dropdown-item:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+    transform: translateX(4px);
+}
+
+.mega-dropdown .dropdown-item i {
+    color: #dc2626;
+    width: 16px;
+}
+
+/* Regular Dropdown Styles */
+.dropdown-menu {
+    border: none !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 0 !important;
+    margin-top: 0.5rem !important;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    color: #374151;
+}
+
+.dropdown-item:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+    transform: translateX(4px);
+}
+
+.dropdown-item i {
+    color: #dc2626;
+    width: 16px;
+}
+
+/* Navbar Link Styles */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #374151 !important;
+    margin: 0 var(--space-sm);
+    padding: var(--space-sm) var(--space-md) !important;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #dc2626 !important;
+    background: rgba(220, 38, 38, 0.05);
+    transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+    color: #dc2626 !important;
+    font-weight: 600;
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.navbar-nav .nav-link.dropdown-toggle::after {
+    border-top: 0.3em solid #dc2626;
+    margin-left: 0.5em;
 }

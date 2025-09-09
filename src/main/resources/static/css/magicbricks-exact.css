@@ -1,0 +1,827 @@
+/* 🏙️ DARK PURPLE REAL ESTATE PALETTE - MAGICBRICKS CLONE */
+/* Professional Magicbricks-inspired styling with dark purple theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* 🔮 Dark Purple Real Estate Color Palette */
+    --bg-primary: #0B0B0B;           /* Deep Black for main background */
+    --bg-secondary: #1E1E1E;         /* Charcoal Grey for sections/cards */
+    --accent-primary: #6C63FF;       /* Vibrant Violet for buttons, links, CTAs */
+    --accent-secondary: #4B0082;     /* Deep Purple for hover states, gradients */
+    --text-primary: #EDEDED;         /* Soft White for good readability */
+    --text-secondary: #A0A0A0;       /* Medium Gray for descriptions */
+    --border-color: #2C2C2C;         /* Subtle Dark Border */
+    
+    /* Gradient combinations for modern effects */
+    --gradient-primary: linear-gradient(135deg, #6C63FF 0%, #4B0082 100%);
+    --gradient-hover: linear-gradient(135deg, #4B0082 0%, #6C63FF 100%);
+    --gradient-card: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(75, 0, 130, 0.1) 100%);
+    
+    /* Shadows with purple tint */
+    --shadow-sm: 0 2px 4px rgba(75, 0, 130, 0.1);
+    --shadow-md: 0 4px 12px rgba(75, 0, 130, 0.15);
+    --shadow-lg: 0 8px 25px rgba(75, 0, 130, 0.2);
+    --shadow-xl: 0 20px 40px rgba(75, 0, 130, 0.25);
+    
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
+}
+
+/* Reset and Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Magicbricks Header */
+.magicbricks-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Navigation (Dark Background) */
+.top-navigation {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 40px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.brand-logo i {
+    font-size: 28px;
+    margin-right: 8px;
+}
+
+.brand-logo:hover {
+    color: var(--accent-secondary);
+    text-decoration: none;
+}
+
+/* Main Menu */
+.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.menu-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.menu-btn:hover {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--accent-primary);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bg-secondary);
+    min-width: 280px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    margin-top: 8px;
+    z-index: 1001;
+}
+
+.menu-dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-section {
+    margin-bottom: 16px;
+}
+
+.dropdown-section:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-section h6 {
+    font-size: 14px;
+    color: var(--accent-primary);
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dropdown-section a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 0;
+    font-size: 14px;
+    transition: var(--transition-fast);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dropdown-section a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-section a:hover {
+    color: var(--accent-primary);
+    padding-left: 8px;
+}
+
+/* Right Side Actions */
+.nav-link-action {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-link-action:hover {
+    color: var(--accent-primary);
+    background: rgba(108, 99, 255, 0.1);
+    text-decoration: none;
+}
+
+.btn-post-free {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-post-free:hover {
+    background: var(--gradient-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    text-decoration: none;
+}
+
+/* Filter Navigation (Purple Background) */
+.filter-navigation {
+    background: var(--gradient-primary);
+    padding: 12px 0;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.filter-button {
+    background: rgba(237, 237, 237, 0.95);
+    border: none;
+    color: var(--bg-primary);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.filter-button:hover,
+.filter-button.active {
+    background: var(--text-primary);
+    color: var(--accent-secondary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.filter-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bg-secondary);
+    min-width: 220px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    margin-top: 8px;
+    z-index: 1001;
+    display: none;
+}
+
+.filter-dropdown:hover .filter-dropdown-menu {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+.filter-content h6 {
+    font-size: 12px;
+    color: var(--accent-primary);
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-content a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 0;
+    font-size: 14px;
+    transition: var(--transition-fast);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filter-content a:last-child {
+    border-bottom: none;
+}
+
+.filter-content a:hover {
+    color: var(--accent-primary);
+    padding-left: 12px;
+}
+
+.search-btn {
+    background: var(--text-primary);
+    color: var(--accent-secondary);
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-btn:hover {
+    background: rgba(237, 237, 237, 0.9);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Magicbricks Property Cards - Dark Purple Style */
+.property-card-magicbricks {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+    padding: 20px;
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.property-card-magicbricks:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+}
+
+/* Property Image Section */
+.property-image-section {
+    position: relative;
+    flex-shrink: 0;
+    width: 240px;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.property-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.property-card-magicbricks:hover .property-image-section img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Image Overlays */
+.photos-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.updated-overlay {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--accent-primary);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.verified-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--accent-secondary);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Property Details Section */
+.property-details-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.property-title-magicbricks {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.property-title-magicbricks:hover {
+    color: var(--accent-primary);
+}
+
+/* Property Badges */
+.property-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.property-badge {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.property-badge.status-ready {
+    background: rgba(108, 99, 255, 0.2);
+    color: var(--accent-primary);
+    border-color: rgba(108, 99, 255, 0.4);
+}
+
+.property-badge.status-construction {
+    background: rgba(237, 237, 237, 0.1);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.property-description-magicbricks {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.owner-details {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
+/* Property Price Section */
+.property-price-section {
+    flex-shrink: 0;
+    width: 200px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.price-container {
+    text-align: right;
+    margin-bottom: 16px;
+}
+
+.property-price-magicbricks {
+    color: var(--accent-primary);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.price-per-sqft {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 4px 0 0 0;
+}
+
+/* Action Buttons */
+.property-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-contact-owner {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-contact-owner:hover {
+    background: var(--gradient-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-get-phone {
+    background: transparent;
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-get-phone:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1200px) {
+    .main-menu {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 768px) {
+    .property-card-magicbricks {
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    .property-image-section {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .property-price-section {
+        width: 100%;
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .property-actions {
+        flex-direction: row;
+        gap: 12px;
+    }
+    
+    .filter-bar {
+        justify-content: center;
+    }
+    
+    .filter-group {
+        gap: 8px;
+    }
+    
+    .filter-button {
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    body {
+        padding-top: 140px;
+    }
+}
+
+@media (min-width: 769px) {
+    body {
+        padding-top: 120px;
+    }
+}
+
+/* Additional body spacing for fixed header */
+body {
+    padding-top: 140px;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 160px;
+    }
+}
+
+/* Special States */
+.property-card-magicbricks.featured {
+    border-left: 4px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(108, 99, 255, 0.05) 100%);
+}
+
+.property-card-magicbricks.verified {
+    border-left: 4px solid var(--accent-secondary);
+}
+
+.property-card-magicbricks.premium {
+    border-left: 4px solid var(--accent-primary);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(108, 99, 255, 0.1) 100%);
+}
+
+/* Loading States */
+.filter-button.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.filter-button.loading::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+    border: 2px solid var(--accent-primary);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Hover Effects */
+.property-card-magicbricks::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.property-card-magicbricks:hover::before {
+    left: 100%;
+}
+
+/* Accessibility Improvements */
+.filter-button:focus,
+.menu-btn:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Smooth Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Form Enhancements */
+.form-control:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.btn-outline-danger:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+/* 🌟 FLOATING LABEL ENHANCEMENTS */
+.form-floating > label {
+    color: var(--text-secondary) !important;
+    padding: 1rem 0.75rem !important;
+    opacity: 0.8;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+    color: var(--accent-primary) !important;
+    font-weight: 600 !important;
+    opacity: 1;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+.form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.75rem;
+}
+
+.form-floating > .form-select {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.75rem;
+}
+
+/* 🎯 HERO SEARCH SPECIFIC STYLES */
+.hero-search .form-floating > label {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.hero-search .form-floating > .form-control,
+.hero-search .form-floating > .form-select {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* 💫 SECTION HEADER SPACING */
+.section-padding {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+/* 🎨 ADDITIONAL DARK THEME UTILITIES */
+.bg-dark-purple {
+    background: var(--bg-primary) !important;
+}
+
+.text-accent {
+    color: var(--accent-primary) !important;
+}
+
+.border-accent {
+    border-color: var(--accent-primary) !important;
+}

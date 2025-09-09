@@ -47,8 +47,8 @@
     </section>
     
     <!-- Properties Section -->
-    <section class="py-5" style="background: var(--bg-primary); padding-top: 140px;">
-        <div class="container">
+    <section class="py-5" style="background: var(--background); padding-top: 140px;">
+        <div class="container-center">
             <!-- Search & Filter Bar -->
             <div class="row mb-5">
                 <div class="col-12">
@@ -141,88 +141,106 @@
                 </div>
             </div>
             
-            <!-- Magicbricks-Style Property Cards -->
-            <div class="properties-list">
+            <!-- Enhanced Property Grid -->
+            <div class="row g-4">
                 <c:choose>
                     <c:when test="${not empty properties}">
                         <c:forEach items="${properties}" var="property" varStatus="status">
-                            <div class="property-card-magicbricks" data-aos="fade-up" data-aos-delay="${status.index * 50}">
-                                <!-- Property Image Section -->
-                                <div class="property-image-section">
-                                    <c:choose>
-                                        <c:when test="${not empty property.imageUrl}">
-                                            <img src="${property.imageUrl}" alt="${property.title}" loading="lazy">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" 
-                                                 alt="${property.title}" loading="lazy">
-                                        </c:otherwise>
-                                    </c:choose>
-                                    
-                                    <!-- Image Overlays -->
-                                    <div class="photos-overlay">
-                                        <i class="bi bi-images"></i> 5+ Photos
-                                    </div>
-                                    <div class="updated-overlay">New</div>
-                                    <c:if test="${property.verified == true}">
-                                        <div class="verified-badge">Verified</div>
-                                    </c:if>
-                                </div>
-                                
-                                <!-- Property Details Section -->
-                                <div class="property-details-section">
-                                    <h3 class="property-title-magicbricks">${property.title}</h3>
-                                    
-                                    <!-- Property Badges -->
-                                    <div class="property-badges">
-                                        <span class="property-badge status-ready">
-                                            <i class="bi bi-check-circle"></i> Ready to Move
-                                        </span>
-                                        <c:if test="${property.bedrooms != null && property.bedrooms > 0}">
-                                            <span class="property-badge">
-                                                <i class="bi bi-door-open"></i> ${property.bedrooms} BHK
-                                            </span>
-                                        </c:if>
-                                        <c:if test="${property.area != null && property.area > 0}">
-                                            <span class="property-badge">
-                                                <i class="bi bi-rulers"></i> <fmt:formatNumber value="${property.area}" pattern=",###"/> sq ft
-                                            </span>
-                                        </c:if>
-                                        <span class="property-badge">
-                                            <i class="bi bi-buildings"></i> ${property.propertyType}
-                                        </span>
-                                    </div>
-                                    
-                                    <p class="property-description-magicbricks">
-                                        Premium ${property.propertyType.toLowerCase()} located in ${property.location} with modern amenities and excellent connectivity. Perfect for ${property.bedrooms > 2 ? 'families' : 'young professionals'}.
-                                    </p>
-                                    
-                                    <div class="owner-details">
-                                        <i class="bi bi-person"></i> By Owner | 
-                                        <i class="bi bi-geo-alt"></i> ${property.location}
-                                    </div>
-                                </div>
-                                
-                                <!-- Property Price Section -->
-                                <div class="property-price-section">
-                                    <div class="price-container">
-                                        <h2 class="property-price-magicbricks">
-                                            ₹<fmt:formatNumber value="${property.price / 100000}" pattern="##.##"/> L
-                                        </h2>
-                                        <c:if test="${property.area != null && property.area > 0}">
-                                            <p class="price-per-sqft">
-                                                ₹<fmt:formatNumber value="${(property.price / property.area)}" pattern=",###"/> per sq ft
-                                            </p>
-                                        </c:if>
-                                    </div>
-                                    
-                                    <div class="property-actions">
-                                        <a href="/property/${property.id}" class="btn-contact-owner">
-                                            <i class="bi bi-eye"></i> View Details
-                                        </a>
-                                        <button class="btn-get-phone" onclick="contactOwner(${property.id})">
-                                            <i class="bi bi-telephone"></i> Contact Owner
-                                        </button>
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="${status.index * 50}">
+                                <div class="card property-card">
+                                    <div class="row g-0">
+                                        <!-- Property Image -->
+                                        <div class="col-md-4">
+                                            <div class="property-image">
+                                                <c:choose>
+                                                    <c:when test="${not empty property.imageUrl}">
+                                                        <img src="${property.imageUrl}" alt="${property.title}" loading="lazy">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80" 
+                                                             alt="${property.title}" loading="lazy">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                
+                                                <!-- Property Badge -->
+                                                <div class="property-badge">${property.propertyType}</div>
+                                                
+                                                <!-- Favorite Button -->
+                                                <button class="btn btn-ghost btn-sm position-absolute top-0 end-0 m-3" 
+                                                        onclick="toggleFavorite(${property.id})" 
+                                                        style="background: rgba(0,0,0,0.5); color: white; border-radius: 50%; width: 40px; height: 40px;">
+                                                    <i class="bi bi-heart"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Property Details -->
+                                        <div class="col-md-5">
+                                            <div class="property-details">
+                                                <h3 class="property-title">${property.title}</h3>
+                                                
+                                                <div class="property-location mb-3">
+                                                    <i class="bi bi-geo-alt-fill text-primary"></i>
+                                                    ${property.location}
+                                                </div>
+                                                
+                                                <div class="property-features">
+                                                    <c:if test="${property.bedrooms != null && property.bedrooms > 0}">
+                                                        <span class="feature-badge">
+                                                            <i class="bi bi-door-open"></i>${property.bedrooms} BHK
+                                                        </span>
+                                                    </c:if>
+                                                    <c:if test="${property.bathrooms != null && property.bathrooms > 0}">
+                                                        <span class="feature-badge">
+                                                            <i class="bi bi-droplet"></i>${property.bathrooms} Bath
+                                                        </span>
+                                                    </c:if>
+                                                    <c:if test="${property.area != null && property.area > 0}">
+                                                        <span class="feature-badge">
+                                                            <i class="bi bi-rulers"></i><fmt:formatNumber value="${property.area}" pattern=",###"/> sq ft
+                                                        </span>
+                                                    </c:if>
+                                                    <span class="feature-badge">
+                                                        <i class="bi bi-check-circle"></i>Ready to Move
+                                                    </span>
+                                                </div>
+                                                
+                                                <p style="color: var(--muted-foreground); font-size: var(--text-sm); line-height: 1.5; margin: var(--space-3) 0;">
+                                                    Premium ${property.propertyType.toLowerCase()} in ${property.location} with modern amenities and excellent connectivity.
+                                                </p>
+                                                
+                                                <div style="color: var(--muted-foreground); font-size: var(--text-xs); display: flex; align-items: center; gap: var(--space-2);">
+                                                    <i class="bi bi-person"></i> By Owner
+                                                    <span>•</span>
+                                                    <i class="bi bi-clock"></i> 2 days ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Property Price & Actions -->
+                                        <div class="col-md-3">
+                                            <div class="d-flex flex-column justify-content-between h-100 p-4">
+                                                <div class="text-end">
+                                                    <div class="property-price mb-2">
+                                                        ₹<fmt:formatNumber value="${property.price / 100000}" pattern="##.##"/> L
+                                                    </div>
+                                                    <c:if test="${property.area != null && property.area > 0}">
+                                                        <div style="color: var(--muted-foreground); font-size: var(--text-xs);">
+                                                            ₹<fmt:formatNumber value="${(property.price / property.area)}" pattern=",###"/> per sq ft
+                                                        </div>
+                                                    </c:if>
+                                                </div>
+                                                
+                                                <div class="property-actions">
+                                                    <a href="/property/${property.id}" class="btn btn-primary btn-sm w-100 mb-2">
+                                                        <i class="bi bi-eye me-2"></i>View Details
+                                                    </a>
+                                                    <button class="btn btn-outline btn-sm w-100" onclick="contactOwner(${property.id})">
+                                                        <i class="bi bi-telephone me-2"></i>Contact
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -280,11 +298,10 @@
         <i class="bi bi-arrow-up"></i>
     </button>
     
-    <!-- Scripts -->
-    <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
     
     <script>
         AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });

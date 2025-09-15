@@ -30,14 +30,36 @@ public class HomeController {
     @GetMapping("/properties")
     public String properties(Model model,
                            @RequestParam(required = false) String location,
-                           @RequestParam(required = false) String type) {
-        if (location != null && !location.isEmpty()) {
-            model.addAttribute("properties", propertyService.findByLocation(location));
-        } else {
+                           @RequestParam(required = false) String type,
+                           @RequestParam(required = false) String minPrice,
+                           @RequestParam(required = false) String maxPrice,
+                           @RequestParam(required = false) String bedrooms,
+                           @RequestParam(required = false) String budget,
+                           @RequestParam(required = false) Boolean featured) {
+
+        try {
+            if (location != null && !location.isEmpty()) {
+                log.info("Searching properties by location: {}", location);
+                model.addAttribute("properties", propertyService.findByLocation(location));
+            } else if (featured != null && featured) {
+                log.info("Fetching featured properties");
+                model.addAttribute("properties", propertyService.getTopProperties(6));
+            } else {
+                log.info("Fetching all properties");
+                model.addAttribute("properties", propertyService.findAll());
+            }
+
+            model.addAttribute("propertyTypes", propertyService.getPropertyCountByType());
+            model.addAttribute("selectedLocation", location);
+            model.addAttribute("selectedType", type);
+
+            return "properties";
+        } catch (Exception e) {
+            log.error("Error loading properties: {}", e.getMessage());
             model.addAttribute("properties", propertyService.findAll());
+            model.addAttribute("error", "Error loading properties. Showing all available properties.");
+            return "properties";
         }
-        model.addAttribute("propertyTypes", propertyService.getPropertyCountByType());
-        return "properties";
     }
 
     @GetMapping("/property/{id}")
@@ -160,5 +182,10 @@ public class HomeController {
         } catch (Exception e) {
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/emi-calculator")
+    public String emiCalculator() {
+        return "emi-calculator";
     }
 }

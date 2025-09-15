@@ -81,7 +81,7 @@
                                 <div class="dropdown-content">
                                     <div class="dropdown-section">
                                         <h6>Loan Services</h6>
-                                        <a href="/calculator">EMI Calculator</a>
+                                        <a href="/emi-calculator">EMI Calculator</a>
                                         <a href="/loans/eligibility">Eligibility Check</a>
                                         <a href="/loans/application">Apply for Loan</a>
                                     </div>

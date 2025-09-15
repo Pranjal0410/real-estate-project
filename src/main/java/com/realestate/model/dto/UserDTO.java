@@ -35,7 +35,7 @@ public class UserDTO {
     @Size(max = 50)
     private String lastName;
 
-    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "Invalid phone number")
+    @Pattern(regexp = "^$|^\\+?[1-9]\\d{1,14}$", message = "Invalid phone number")
     private String phoneNumber;
 
     private UserRole role;

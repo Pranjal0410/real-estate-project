@@ -87,11 +87,11 @@ public class UserService {
         
         User user = userMapper.toEntity(userDTO);
         // Note: password encoding should be handled in the UserMapper or after conversion
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setIsEnabled(true);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-        
+
         if (user.getRole() == null) {
             user.setRole(User.UserRole.INVESTOR);
         }

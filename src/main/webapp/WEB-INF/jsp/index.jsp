@@ -39,11 +39,11 @@
         <div class="container-center">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    Find Your Perfect Property
+                    Find Your Dream Home Today
                 </h1>
                 <p class="hero-subtitle">
-                    Discover premium real estate opportunities with AI-powered insights. 
-                    Buy, sell, or rent properties with confidence on India's leading platform.
+                    Explore premium real estate opportunities powered by smart technology.
+                    Buy, sell, or rent with confidence on India's most trusted property platform.
                 </p>
                 
                 <!-- Enhanced Search Bar -->
@@ -66,9 +66,10 @@
                                 <select class="form-input form-select" id="propertyType" name="type">
                                     <option value="">All Types</option>
                                     <option value="APARTMENT">Apartment</option>
-                                    <option value="HOUSE">Independent House</option>
+                                    <option value="RESIDENTIAL">Independent House</option>
                                     <option value="VILLA">Villa</option>
-                                    <option value="PLOT">Plot/Land</option>
+                                    <option value="COMMERCIAL">Commercial</option>
+                                    <option value="OFFICE">Office</option>
                                 </select>
                             </div>
                         </div>
@@ -99,14 +100,17 @@
                     
                     <!-- Quick Action Buttons -->
                     <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-                        <a href="/properties?featured=true" class="btn btn-outline btn-sm">
-                            <i class="bi bi-star me-2"></i>Featured
+                        <a href="/properties" class="btn btn-outline btn-sm">
+                            <i class="bi bi-house me-2"></i>Browse All
+                        </a>
+                        <a href="/properties?location=mumbai" class="btn btn-outline btn-sm">
+                            <i class="bi bi-star me-2"></i>Mumbai Premium
                         </a>
                         <a href="/calculator" class="btn btn-outline btn-sm">
-                            <i class="bi bi-calculator me-2"></i>Calculator
+                            <i class="bi bi-calculator me-2"></i>EMI Calculator
                         </a>
                         <a href="/chatbot" class="btn btn-outline btn-sm">
-                            <i class="bi bi-robot me-2"></i>AI Assistant
+                            <i class="bi bi-robot me-2"></i>Get Expert Advice
                         </a>
                     </div>
                 </div>
@@ -114,146 +118,29 @@
         </div>
     </section>
 
-    <!-- 🎯 IMPRESSIVE STATISTICS SECTION -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-container">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="bi bi-buildings"></i>
-                    </div>
-                    <div class="stat-number" data-count="${propertyCount > 0 ? propertyCount : 500}">0</div>
-                    <div class="stat-label">Properties Listed</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="bi bi-people-fill"></i>
-                    </div>
-                    <div class="stat-number" data-count="${userCount > 0 ? userCount : 10000}">0</div>
-                    <div class="stat-label">Registered Users</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="stat-number" data-count="50">0</div>
-                    <div class="stat-label">Million+ Invested</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 🌟 FEATURES SECTION -->
-    <section class="features-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center mb-5" >
-                    <h2 class="section-title">Why Choose PropInvest?</h2>
-                    <p class="section-subtitle">
-                        Discover the powerful features that make us the leading platform for smart real estate investments
-                    </p>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                <!-- Feature 1: Advanced Analytics -->
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="bi bi-graph-up-arrow"></i>
-                        </div>
-                        <h4 class="feature-title">Advanced Analytics</h4>
-                        <p class="feature-description">
-                            Calculate ROI, rental yield, cap rate, and comprehensive investment metrics with our 
-                            sophisticated analytical tools and real-time market data.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Feature 2: AI Assistant -->
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="bi bi-robot"></i>
-                        </div>
-                        <h4 class="feature-title">AI-Powered Assistant</h4>
-                        <p class="feature-description">
-                            Get instant property recommendations and personalized investment advice from our 
-                            intelligent chatbot powered by advanced machine learning algorithms.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Feature 3: Secure Platform -->
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <h4 class="feature-title">Enterprise Security</h4>
-                        <p class="feature-description">
-                            Bank-level security with JWT authentication, encrypted data transmission, and 
-                            role-based access control to protect your investments and personal information.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Feature 4: Market Insights -->
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="bi bi-bar-chart-line"></i>
-                        </div>
-                        <h4 class="feature-title">Market Insights</h4>
-                        <p class="feature-description">
-                            Access comprehensive market analysis, trend predictions, and neighborhood comparisons 
-                            to make informed investment decisions.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Feature 5: Portfolio Management -->
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="bi bi-pie-chart"></i>
-                        </div>
-                        <h4 class="feature-title">Portfolio Tracking</h4>
-                        <p class="feature-description">
-                            Monitor your investment portfolio performance with detailed analytics, 
-                            automated reporting, and customizable dashboards.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Feature 6: 24/7 Support -->
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="bi bi-headset"></i>
-                        </div>
-                        <h4 class="feature-title">24/7 Support</h4>
-                        <p class="feature-description">
-                            Get round-the-clock support from our experienced team of real estate professionals 
-                            and technical experts whenever you need assistance.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 🏠 FEATURED PROPERTIES SECTION -->
+    <!-- 🏠 FEATURED PROPERTIES SECTION - Moved right after search for better UX -->
     <section class="properties-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center mb-5" >
-                    <h2 class="section-title">Featured Properties</h2>
+                    <h2 class="section-title">🏆 Premium Properties Available Now</h2>
                     <p class="section-subtitle">
-                        Discover our handpicked selection of premium investment opportunities with high ROI potential
+                        Start exploring our top-rated properties in Pune, Mumbai, Delhi & Bangalore. Ready to move, verified owners, best prices guaranteed.
                     </p>
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <a href="/properties?location=pune" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-geo-alt me-1"></i>Pune Properties
+                        </a>
+                        <a href="/properties?location=mumbai" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-geo-alt me-1"></i>Mumbai Properties
+                        </a>
+                        <a href="/properties?location=delhi" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-geo-alt me-1"></i>Delhi Properties
+                        </a>
+                        <a href="/properties?location=bangalore" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-geo-alt me-1"></i>Bangalore Properties
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -266,14 +153,7 @@
                                     <div class="property-card">
                                         <!-- Property Image -->
                                         <div class="property-image">
-                                            <c:choose>
-                                                <c:when test="${not empty property.imageUrl}">
-                                                    <img src="${property.imageUrl}" alt="${property.title}">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img src="https://source.unsplash.com/400x250/?${property.propertyType != null ? property.propertyType.toLowerCase() : 'house'},property" alt="${property.title}">
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="${property.title}">
                                             <!-- Property Type Badge -->
                                             <div class="property-badge">${property.propertyType}</div>
                                         </div>
@@ -401,13 +281,16 @@
             
             <!-- View All Properties Button -->
             <div class="text-center" >
-                <a href="/properties" class="btn btn-primary btn-lg">
-                    <i class="bi bi-grid me-2"></i>View All Properties
+                <a href="/properties" class="btn btn-primary btn-lg px-5 py-3">
+                    <i class="bi bi-grid me-2"></i>Browse All 24 Properties
                 </a>
+                <p class="mt-3 text-muted">
+                    <small>✓ Verified listings ✓ No hidden fees ✓ Direct owner contact</small>
+                </p>
             </div>
         </div>
     </section>
-    
+
     <!-- 💬 TESTIMONIALS SECTION -->
     <section class="testimonials-section">
         <div class="container">
@@ -462,7 +345,138 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- 🎯 IMPRESSIVE STATISTICS SECTION -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+                    <div class="stat-number" data-count="${propertyCount > 0 ? propertyCount : 500}">0</div>
+                    <div class="stat-label">Properties Listed</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-number" data-count="${userCount > 0 ? userCount : 10000}">0</div>
+                    <div class="stat-label">Registered Users</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">Million+ Invested</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌟 FEATURES SECTION -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5" >
+                    <h2 class="section-title">Why Choose PropInvest?</h2>
+                    <p class="section-subtitle">
+                        Discover the powerful features that make us the leading platform for smart real estate investments
+                    </p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Feature 1: Advanced Analytics -->
+                <div class="col-lg-4 col-md-6"  >
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h4 class="feature-title">Advanced Analytics</h4>
+                        <p class="feature-description">
+                            Calculate ROI, rental yield, cap rate, and comprehensive investment metrics with our
+                            sophisticated analytical tools and real-time market data.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2: AI Assistant -->
+                <div class="col-lg-4 col-md-6"  >
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h4 class="feature-title">AI-Powered Assistant</h4>
+                        <p class="feature-description">
+                            Get instant property recommendations and personalized investment advice from our
+                            intelligent chatbot powered by advanced machine learning algorithms.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Secure Platform -->
+                <div class="col-lg-4 col-md-6"  >
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="feature-title">Enterprise Security</h4>
+                        <p class="feature-description">
+                            Bank-level security with JWT authentication, encrypted data transmission, and
+                            role-based access control to protect your investments and personal information.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Market Insights -->
+                <div class="col-lg-4 col-md-6"  >
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-bar-chart-line"></i>
+                        </div>
+                        <h4 class="feature-title">Market Insights</h4>
+                        <p class="feature-description">
+                            Access comprehensive market analysis, trend predictions, and neighborhood comparisons
+                            to make informed investment decisions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Portfolio Management -->
+                <div class="col-lg-4 col-md-6"  >
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-pie-chart"></i>
+                        </div>
+                        <h4 class="feature-title">Portfolio Tracking</h4>
+                        <p class="feature-description">
+                            Monitor your investment portfolio performance with detailed analytics,
+                            automated reporting, and customizable dashboards.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 6: 24/7 Support -->
+                <div class="col-lg-4 col-md-6"  >
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h4 class="feature-title">24/7 Support</h4>
+                        <p class="feature-description">
+                            Get round-the-clock support from our experienced team of real estate professionals
+                            and technical experts whenever you need assistance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 🚀 CTA SECTION -->
     <section class="cta-section">
         <div class="container">

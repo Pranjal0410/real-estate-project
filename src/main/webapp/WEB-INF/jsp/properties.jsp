@@ -63,7 +63,7 @@
                                     <select class="form-select" id="location" name="location" onchange="this.form.submit()">
                                         <option value="">All Cities</option>
                                         <option value="pune" ${param.location == 'pune' ? 'selected' : ''}>Pune</option>
-                                        <option value="chandigarh" ${param.location == 'chandigarh' ? 'selected' : ''}>Chandigarh</option>
+                                        <option value="mumbai" ${param.location == 'mumbai' ? 'selected' : ''}>Mumbai</option>
                                         <option value="delhi" ${param.location == 'delhi' ? 'selected' : ''}>Delhi</option>
                                         <option value="bangalore" ${param.location == 'bangalore' ? 'selected' : ''}>Bangalore</option>
                                     </select>
@@ -155,15 +155,8 @@
                                         <!-- Property Image -->
                                         <div class="col-md-4">
                                             <div class="property-image-professional">
-                                                <c:choose>
-                                                    <c:when test="${not empty property.imageUrl}">
-                                                        <img src="${property.imageUrl}" alt="${property.title}" loading="lazy">
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80"
-                                                             alt="${property.title}" loading="lazy">
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80"
+                                                     alt="${property.title}" loading="lazy">
 
                                                 <!-- Property Badge -->
                                                 <div class="property-badge-professional">${property.propertyType}</div>
@@ -207,7 +200,7 @@
                                                 </div>
 
                                                 <p class="property-description-professional">
-                                                    Premium ${property.propertyType.toLowerCase()} in ${property.location} with modern amenities and excellent connectivity.
+                                                    Premium ${property.propertyType} in ${property.location} with modern amenities and excellent connectivity.
                                                 </p>
 
                                                 <div class="property-meta-professional">

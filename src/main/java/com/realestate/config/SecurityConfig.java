@@ -67,7 +67,7 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/dashboard", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error=true")
                 .permitAll())
             .logout(logout -> logout
@@ -76,7 +76,7 @@ public class SecurityConfig {
                 .permitAll())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/home", "/about", "/contact", "/properties", "/property/**", "/propeties").permitAll()
-                .requestMatchers("/calculator", "/chatbot").permitAll()
+                .requestMatchers("/calculator", "/chatbot", "/emi-calculator").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/properties/**").permitAll()
                 .requestMatchers("/api/investments/**").permitAll()

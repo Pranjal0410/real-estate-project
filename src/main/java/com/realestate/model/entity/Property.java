@@ -103,13 +103,13 @@ public class Property extends BaseEntity {
     @Builder.Default
     private Boolean hasGarage = false;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "property_amenities", joinColumns = @JoinColumn(name = "property_id"))
     @Column(name = "amenity")
     @Builder.Default
     private Set<String> amenities = new HashSet<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "property_images", joinColumns = @JoinColumn(name = "property_id"))
     @Column(name = "image_url")
     @Builder.Default

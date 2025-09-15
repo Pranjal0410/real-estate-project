@@ -8,8 +8,8 @@
     <title>Investment Calculator - Real Estate Platform</title>
     <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/global.css" rel="stylesheet">
-    <link href="/css/magicbricks-exact.css" rel="stylesheet">
+    <link href="/css/shadcn-enhanced.css" rel="stylesheet">
+    <link href="/css/components.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>

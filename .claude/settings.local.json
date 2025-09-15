@@ -12,7 +12,11 @@
       "Bash(ren:*)",
       "Bash(mv:*)",
       "Bash(dir)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(timeout:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(cmd /c:*)"
     ],
     "deny": [],
     "ask": []

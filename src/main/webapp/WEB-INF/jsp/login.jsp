@@ -182,7 +182,7 @@
             </c:if>
             
             <!-- Login Form -->
-            <form action="/login" method="post" novalidate>
+            <form id="loginForm" action="/login" method="post" novalidate>
                 <div class="form-field">
                     <div class="form-group">
                         <label for="username" class="form-label">
@@ -235,7 +235,7 @@
                         Sign In
                     </button>
                 </div>
-                
+
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
             
@@ -274,30 +274,33 @@
             // Auto-focus first input
             $('#username').focus();
             
-            // Form validation
-            $('form').on('submit', function(e) {
+            // Form validation and submission - use traditional form submission
+            $('#loginForm').on('submit', function(e) {
                 const username = $('#username').val().trim();
                 const password = $('#password').val().trim();
-                
+
                 if (!username || !password) {
                     e.preventDefault();
                     $('.error-message').remove();
-                    
+
                     const errorHtml = `
                         <div class="error-message">
                             <i class="bi bi-exclamation-triangle me-2"></i>
                             Please fill in all required fields.
                         </div>
                     `;
-                    
+
                     $('.login-header').after(errorHtml);
                     return false;
                 }
-                
+
                 // Show loading state
                 const submitBtn = $('button[type="submit"]');
                 submitBtn.prop('disabled', true);
                 submitBtn.html('<i class="spinner-border spinner-border-sm me-2"></i>Signing in...');
+
+                // Let the form submit naturally - Spring Security will handle it
+                return true;
             });
             
             // Clear errors on input

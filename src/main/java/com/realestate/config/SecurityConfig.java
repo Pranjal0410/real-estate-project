@@ -59,9 +59,21 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(AbstractHttpConfigurer::disable)
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(org.springframework.security.web.csrf.CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .ignoringRequestMatchers("/api/**"))
             .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+            .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/dashboard", true)
+                .failureUrl("/login?error=true")
+                .permitAll())
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/home", "/about", "/contact", "/properties", "/property/**", "/propeties").permitAll()
                 .requestMatchers("/calculator", "/chatbot").permitAll()

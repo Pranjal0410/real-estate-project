@@ -1,5 +1,6 @@
 package com.realestate.controller;
 
+import com.realestate.model.dto.UserDTO;
 import com.realestate.service.PropertyService;
 import com.realestate.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -64,12 +65,22 @@ public class HomeController {
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         try {
-            model.addAttribute("user", userService.getCurrentUser());
+            // Try to get current user, but don't fail if we can't
+            try {
+                UserDTO currentUser = userService.getCurrentUser();
+                model.addAttribute("user", currentUser);
+                log.debug("Dashboard loaded for user: {}", currentUser.getUsername());
+            } catch (Exception e) {
+                log.warn("Could not get current user for dashboard: {}", e.getMessage());
+                // Continue without user data - dashboard will show generic content
+            }
+
             model.addAttribute("properties", propertyService.findAll());
             model.addAttribute("stats", propertyService.getPropertyCountByType());
             return "dashboard";
         } catch (Exception e) {
-            return "redirect:/login";
+            log.error("Error loading dashboard: {}", e.getMessage());
+            return "redirect:/login?error=dashboard";
         }
     }
 

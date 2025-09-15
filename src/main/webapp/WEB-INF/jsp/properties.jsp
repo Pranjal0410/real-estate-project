@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +20,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href="/css/magicbricks-exact.css" rel="stylesheet">
     <link href="/css/shadcn-enhanced.css" rel="stylesheet">
+    <link href="/css/components.css" rel="stylesheet">
+    <link href="/css/navbar.css" rel="stylesheet">
+    <link href="/css/sections.css" rel="stylesheet">
+    <link href="/css/properties-listing.css" rel="stylesheet">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
-<body>
+<body class="properties-page">
     <div id="scrollProgress"></div>
     
     <!-- Include Magicbricks-Style Navigation -->
@@ -52,16 +52,21 @@
             <!-- Search & Filter Bar -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <div class="card shadow-sm border-0" data-aos="fade-up">
-                        <div class="card-body p-4">
-                            <h5 class="card-title mb-4 text-dark">
-                                <i class="bi bi-funnel me-2 text-danger"></i>Find Your Perfect Property
+                    <div class="search-filter-card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="bi bi-funnel me-2" style="color: var(--primary);"></i>Find Your Perfect Property
                             </h5>
                             <form method="get" action="/properties" class="row g-3">
                                 <div class="col-md-3">
                                     <label for="location" class="form-label fw-semibold">Location</label>
-                                    <input type="text" class="form-control" id="location" name="location" 
-                                           placeholder="Enter city or state" value="${param.location}">
+                                    <select class="form-select" id="location" name="location" onchange="this.form.submit()">
+                                        <option value="">All Cities</option>
+                                        <option value="pune" ${param.location == 'pune' ? 'selected' : ''}>Pune</option>
+                                        <option value="chandigarh" ${param.location == 'chandigarh' ? 'selected' : ''}>Chandigarh</option>
+                                        <option value="delhi" ${param.location == 'delhi' ? 'selected' : ''}>Delhi</option>
+                                        <option value="bangalore" ${param.location == 'bangalore' ? 'selected' : ''}>Bangalore</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="type" class="form-label fw-semibold">Type</label>
@@ -115,128 +120,124 @@
             </div>
             
             <!-- Results Header -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="text-dark mb-0">
-                            <c:choose>
-                                <c:when test="${not empty properties}">
-                                    ${fn:length(properties)} Properties Found
-                                </c:when>
-                                <c:otherwise>
-                                    No Properties Found
-                                </c:otherwise>
-                            </c:choose>
-                        </h3>
-                        <div class="d-flex align-items-center gap-3">
-                            <span class="text-muted">Sort by:</span>
-                            <select class="form-select" style="width: auto;">
-                                <option>Price: Low to High</option>
-                                <option>Price: High to Low</option>
-                                <option>Newest First</option>
-                                <option>Area: Largest First</option>
-                            </select>
-                        </div>
+            <div class="results-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>
+                        <c:choose>
+                            <c:when test="${not empty properties}">
+                                ${fn:length(properties)} Properties Found
+                            </c:when>
+                            <c:otherwise>
+                                No Properties Found
+                            </c:otherwise>
+                        </c:choose>
+                    </h3>
+                    <div class="sort-controls">
+                        <span class="text-muted">Sort by:</span>
+                        <select class="form-select">
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest First</option>
+                            <option>Area: Largest First</option>
+                        </select>
                     </div>
                 </div>
             </div>
             
             <!-- Enhanced Property Grid -->
-            <div class="row g-4">
+            <div class="row g-4" id="propertyGrid">
                 <c:choose>
                     <c:when test="${not empty properties}">
                         <c:forEach items="${properties}" var="property" varStatus="status">
-                            <div class="col-12" data-aos="fade-up" data-aos-delay="${status.index * 50}">
-                                <div class="card property-card">
+                            <div class="col-12">
+                                <div class="property-card-professional">
                                     <div class="row g-0">
                                         <!-- Property Image -->
                                         <div class="col-md-4">
-                                            <div class="property-image">
+                                            <div class="property-image-professional">
                                                 <c:choose>
                                                     <c:when test="${not empty property.imageUrl}">
                                                         <img src="${property.imageUrl}" alt="${property.title}" loading="lazy">
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80" 
+                                                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80"
                                                              alt="${property.title}" loading="lazy">
                                                     </c:otherwise>
                                                 </c:choose>
-                                                
+
                                                 <!-- Property Badge -->
-                                                <div class="property-badge">${property.propertyType}</div>
-                                                
+                                                <div class="property-badge-professional">${property.propertyType}</div>
+
                                                 <!-- Favorite Button -->
-                                                <button class="btn btn-ghost btn-sm position-absolute top-0 end-0 m-3" 
-                                                        onclick="toggleFavorite(${property.id})" 
-                                                        style="background: rgba(0,0,0,0.5); color: white; border-radius: 50%; width: 40px; height: 40px;">
+                                                <button class="favorite-btn" onclick="toggleFavorite(${property.id})">
                                                     <i class="bi bi-heart"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Property Details -->
                                         <div class="col-md-5">
-                                            <div class="property-details">
-                                                <h3 class="property-title">${property.title}</h3>
-                                                
-                                                <div class="property-location mb-3">
-                                                    <i class="bi bi-geo-alt-fill text-primary"></i>
+                                            <div class="property-details-professional">
+                                                <h3 class="property-title-professional">${property.title}</h3>
+
+                                                <div class="property-location-professional">
+                                                    <i class="bi bi-geo-alt-fill"></i>
                                                     ${property.location}
                                                 </div>
-                                                
-                                                <div class="property-features">
+
+                                                <div class="property-features-professional">
                                                     <c:if test="${property.bedrooms != null && property.bedrooms > 0}">
-                                                        <span class="feature-badge">
+                                                        <span class="feature-badge-professional">
                                                             <i class="bi bi-door-open"></i>${property.bedrooms} BHK
                                                         </span>
                                                     </c:if>
                                                     <c:if test="${property.bathrooms != null && property.bathrooms > 0}">
-                                                        <span class="feature-badge">
+                                                        <span class="feature-badge-professional">
                                                             <i class="bi bi-droplet"></i>${property.bathrooms} Bath
                                                         </span>
                                                     </c:if>
                                                     <c:if test="${property.area != null && property.area > 0}">
-                                                        <span class="feature-badge">
+                                                        <span class="feature-badge-professional">
                                                             <i class="bi bi-rulers"></i><fmt:formatNumber value="${property.area}" pattern=",###"/> sq ft
                                                         </span>
                                                     </c:if>
-                                                    <span class="feature-badge">
+                                                    <span class="feature-badge-professional">
                                                         <i class="bi bi-check-circle"></i>Ready to Move
                                                     </span>
                                                 </div>
-                                                
-                                                <p style="color: var(--muted-foreground); font-size: var(--text-sm); line-height: 1.5; margin: var(--space-3) 0;">
+
+                                                <p class="property-description-professional">
                                                     Premium ${property.propertyType.toLowerCase()} in ${property.location} with modern amenities and excellent connectivity.
                                                 </p>
-                                                
-                                                <div style="color: var(--muted-foreground); font-size: var(--text-xs); display: flex; align-items: center; gap: var(--space-2);">
+
+                                                <div class="property-meta-professional">
                                                     <i class="bi bi-person"></i> By Owner
                                                     <span>•</span>
                                                     <i class="bi bi-clock"></i> 2 days ago
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Property Price & Actions -->
                                         <div class="col-md-3">
-                                            <div class="d-flex flex-column justify-content-between h-100 p-4">
-                                                <div class="text-end">
-                                                    <div class="property-price mb-2">
+                                            <div class="property-price-section-professional">
+                                                <div>
+                                                    <div class="property-price-professional">
                                                         ₹<fmt:formatNumber value="${property.price / 100000}" pattern="##.##"/> L
                                                     </div>
                                                     <c:if test="${property.area != null && property.area > 0}">
-                                                        <div style="color: var(--muted-foreground); font-size: var(--text-xs);">
+                                                        <div class="price-per-sqft-professional">
                                                             ₹<fmt:formatNumber value="${(property.price / property.area)}" pattern=",###"/> per sq ft
                                                         </div>
                                                     </c:if>
                                                 </div>
-                                                
-                                                <div class="property-actions">
-                                                    <a href="/property/${property.id}" class="btn btn-primary btn-sm w-100 mb-2">
-                                                        <i class="bi bi-eye me-2"></i>View Details
+
+                                                <div class="property-actions-professional">
+                                                    <a href="/property/${property.id}" class="btn-view-details-professional">
+                                                        <i class="bi bi-eye"></i>View Details
                                                     </a>
-                                                    <button class="btn btn-outline btn-sm w-100" onclick="contactOwner(${property.id})">
-                                                        <i class="bi bi-telephone me-2"></i>Contact
+                                                    <button class="btn-contact-professional" onclick="contactOwner(${property.id})">
+                                                        <i class="bi bi-telephone"></i>Contact
                                                     </button>
                                                 </div>
                                             </div>
@@ -247,16 +248,14 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <div class="text-center py-5">
-                            <div class="property-card-magicbricks">
-                                <div class="text-center w-100 py-5">
-                                    <i class="bi bi-house-door display-1 mb-4" style="color: var(--accent-primary);"></i>
-                                    <h3 style="color: var(--text-primary);">No Properties Found</h3>
-                                    <p style="color: var(--text-secondary);">Try adjusting your search criteria or check back later for new listings.</p>
-                                    <a href="/properties" class="btn-contact-owner">
-                                        <i class="bi bi-arrow-clockwise me-2"></i>Reset Filters
-                                    </a>
-                                </div>
+                        <div class="col-12">
+                            <div class="no-results-professional">
+                                <i class="bi bi-house-door"></i>
+                                <h3>No Properties Found</h3>
+                                <p>Try adjusting your search criteria or check back later for new listings.</p>
+                                <a href="/properties" class="btn-reset-filters">
+                                    <i class="bi bi-arrow-clockwise"></i>Reset Filters
+                                </a>
                             </div>
                         </div>
                     </c:otherwise>
@@ -265,26 +264,24 @@
             
             <!-- Pagination -->
             <c:if test="${not empty properties}">
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <nav aria-label="Properties pagination">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                <div class="pagination-professional">
+                    <nav aria-label="Properties pagination">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </c:if>
         </div>
@@ -301,11 +298,7 @@
     <!-- Scripts from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    
     <script>
-        AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
-        if (window.VanillaTilt) { VanillaTilt.init(document.querySelectorAll('[data-tilt]')); }
         
         // Back to top functionality
         (function(){

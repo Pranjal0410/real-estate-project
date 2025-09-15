@@ -22,8 +22,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href="/css/magicbricks-exact.css" rel="stylesheet">
     <link href="/css/shadcn-enhanced.css" rel="stylesheet">
+    <link href="/css/components.css" rel="stylesheet">
+    <link href="/css/navbar.css" rel="stylesheet">
+    <link href="/css/sections.css" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -36,16 +38,16 @@
     <section class="hero">
         <div class="container-center">
             <div class="hero-content">
-                <h1 class="hero-title animate-fadeInUp">
+                <h1 class="hero-title">
                     Find Your Perfect Property
                 </h1>
-                <p class="hero-subtitle animate-fadeInUp" style="animation-delay: 0.2s;">
+                <p class="hero-subtitle">
                     Discover premium real estate opportunities with AI-powered insights. 
                     Buy, sell, or rent properties with confidence on India's leading platform.
                 </p>
                 
                 <!-- Enhanced Search Bar -->
-                <div class="hero-search animate-fadeInUp" style="animation-delay: 0.4s;">
+                <div class="hero-search">
                     <form class="row g-3" action="/properties" method="get" novalidate>
                         <div class="col-lg-3 col-md-6">
                             <div class="form-group">
@@ -115,7 +117,7 @@
     <!-- 🎯 IMPRESSIVE STATISTICS SECTION -->
     <section class="stats-section">
         <div class="container">
-            <div class="stats-container" data-aos="fade-up">
+            <div class="stats-container">
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="bi bi-buildings"></i>
@@ -124,7 +126,7 @@
                     <div class="stat-label">Properties Listed</div>
                 </div>
                 
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
                     <div class="stat-icon">
                         <i class="bi bi-people-fill"></i>
                     </div>
@@ -132,7 +134,7 @@
                     <div class="stat-label">Registered Users</div>
                 </div>
                 
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
                     <div class="stat-icon">
                         <i class="bi bi-currency-dollar"></i>
                     </div>
@@ -147,7 +149,7 @@
     <section class="features-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up">
+                <div class="col-lg-8 mx-auto text-center mb-5" >
                     <h2 class="section-title">Why Choose PropInvest?</h2>
                     <p class="section-subtitle">
                         Discover the powerful features that make us the leading platform for smart real estate investments
@@ -157,7 +159,7 @@
             
             <div class="row g-4">
                 <!-- Feature 1: Advanced Analytics -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4 col-md-6"  >
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-graph-up-arrow"></i>
@@ -171,7 +173,7 @@
                 </div>
                 
                 <!-- Feature 2: AI Assistant -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-4 col-md-6"  >
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-robot"></i>
@@ -185,7 +187,7 @@
                 </div>
                 
                 <!-- Feature 3: Secure Platform -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-lg-4 col-md-6"  >
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-shield-check"></i>
@@ -199,7 +201,7 @@
                 </div>
                 
                 <!-- Feature 4: Market Insights -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-lg-4 col-md-6"  >
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-bar-chart-line"></i>
@@ -213,7 +215,7 @@
                 </div>
                 
                 <!-- Feature 5: Portfolio Management -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="col-lg-4 col-md-6"  >
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-pie-chart"></i>
@@ -227,7 +229,7 @@
                 </div>
                 
                 <!-- Feature 6: 24/7 Support -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                <div class="col-lg-4 col-md-6"  >
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-headset"></i>
@@ -247,7 +249,7 @@
     <section class="properties-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up">
+                <div class="col-lg-8 mx-auto text-center mb-5" >
                     <h2 class="section-title">Featured Properties</h2>
                     <p class="section-subtitle">
                         Discover our handpicked selection of premium investment opportunities with high ROI potential
@@ -260,7 +262,7 @@
                     <c:when test="${not empty properties}">
                         <c:forEach items="${properties}" var="property" varStatus="status">
                             <c:if test="${status.index < 6}">
-                                <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="${status.index * 100}">
+                                <div class="col-xl-4 col-lg-6"  >
                                     <div class="property-card">
                                         <!-- Property Image -->
                                         <div class="property-image">
@@ -322,7 +324,7 @@
                     </c:when>
                     <c:otherwise>
                         <!-- Demo Properties when no data available -->
-                        <div class="col-xl-4 col-lg-6" data-aos="fade-up">
+                        <div class="col-xl-4 col-lg-6" >
                             <div class="property-card">
                                 <div class="property-image">
                                     <img src="https://source.unsplash.com/400x250/?luxury,villa" alt="Modern Luxury Villa">
@@ -346,7 +348,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-xl-4 col-lg-6"  >
                             <div class="property-card">
                                 <div class="property-image">
                                     <img src="https://source.unsplash.com/400x250/?penthouse,apartment" alt="Downtown Penthouse">
@@ -370,7 +372,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-xl-4 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="col-xl-4 col-lg-6"  >
                             <div class="property-card">
                                 <div class="property-image">
                                     <img src="https://source.unsplash.com/400x250/?suburban,family,house" alt="Family Suburban Home">
@@ -398,7 +400,7 @@
             </div>
             
             <!-- View All Properties Button -->
-            <div class="text-center" data-aos="fade-up">
+            <div class="text-center" >
                 <a href="/properties" class="btn btn-primary btn-lg">
                     <i class="bi bi-grid me-2"></i>View All Properties
                 </a>
@@ -410,7 +412,7 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up">
+                <div class="col-lg-8 mx-auto text-center mb-5" >
                     <h2 class="section-title">What Our Investors Say</h2>
                     <p class="section-subtitle">
                         Hear from successful investors who have transformed their portfolios with PropInvest
@@ -419,7 +421,7 @@
             </div>
             
             <div class="row g-4">
-                <div class="col-lg-4" data-aos="fade-up">
+                <div class="col-lg-4" >
                     <div class="testimonial-card">
                         <div class="testimonial-quote">
                             <i class="bi bi-quote"></i>
@@ -432,7 +434,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4"  >
                     <div class="testimonial-card">
                         <div class="testimonial-quote">
                             <i class="bi bi-quote"></i>
@@ -445,7 +447,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-4"  >
                     <div class="testimonial-card">
                         <div class="testimonial-quote">
                             <i class="bi bi-quote"></i>
@@ -464,7 +466,7 @@
     <!-- 🚀 CTA SECTION -->
     <section class="cta-section">
         <div class="container">
-            <div class="cta-content" data-aos="fade-up">
+            <div class="cta-content" >
                 <h2 class="cta-title">Ready to Start Your Investment Journey?</h2>
                 <p class="cta-subtitle">
                     Join thousands of successful investors who trust PropInvest for their real estate investment needs. 
@@ -481,7 +483,7 @@
                 </div>
                 
                 <!-- Trust Indicators -->
-                <div class="row text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="row text-center"  >
                     <div class="col-md-3 col-6 mb-4">
                         <div class="d-flex flex-column align-items-center">
                             <i class="bi bi-shield-check fs-2 mb-3 opacity-75"></i>
@@ -582,30 +584,12 @@
             });
         }
         
-        // Scroll-based animations
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            document.querySelectorAll('[data-aos]').forEach(el => {
-                el.classList.add('animate-on-scroll');
-                observer.observe(el);
-            });
-        }
         
         // Initialize all functions when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             initCounters();
             initNavbarScroll();
             initSmoothScroll();
-            initScrollAnimations();
             
             // Add loading complete class for final animations
             setTimeout(() => {

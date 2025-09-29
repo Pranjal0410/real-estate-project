@@ -129,6 +129,10 @@ public class Property extends BaseEntity {
     @Column(name = "annual_maintenance")
     private BigDecimal annualMaintenance;
 
+    @Column(name = "downpayment_amount", precision = 10, scale = 2)
+    @Builder.Default
+    private BigDecimal downpaymentAmount = new BigDecimal("500.00");
+
     @Column(name = "property_tax")
     private BigDecimal propertyTax;
 

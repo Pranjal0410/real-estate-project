@@ -4,30 +4,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* 🎯 Shadcn-Style Color System */
-  --background: #0B0B0B;
+  /* 🎯 Shadcn-Style Color System - Purple Theme */
+  --background: #0f0f23;
   --foreground: #EDEDED;
-  --card: #1E1E1E;
+  --card: #1a1a3e;
   --card-foreground: #EDEDED;
-  --popover: #1E1E1E;
+  --popover: #1e1e32;
   --popover-foreground: #EDEDED;
-  --primary: #6C63FF;
+  --primary: #8b5cf6;
   --primary-foreground: #FFFFFF;
-  --secondary: #2C2C2C;
-  --secondary-foreground: #A0A0A0;
-  --muted: #2C2C2C;
-  --muted-foreground: #A0A0A0;
-  --accent: #4B0082;
+  --secondary: #10b981;
+  --secondary-foreground: #FFFFFF;
+  --muted: #2d2d4a;
+  --muted-foreground: #94a3b8;
+  --accent: #7c3aed;
   --accent-foreground: #FFFFFF;
   --destructive: #ef4444;
   --destructive-foreground: #fecaca;
-  --border: #2C2C2C;
-  --input: #2C2C2C;
-  --ring: #6C63FF;
-  
+  --border: rgba(139, 92, 246, 0.2);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #8b5cf6;
+
   /* 🌊 Gradients */
-  --gradient-primary: linear-gradient(135deg, #6C63FF 0%, #4B0082 100%);
-  --gradient-secondary: linear-gradient(135deg, #1E1E1E 0%, #2C2C2C 100%);
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  --gradient-secondary: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
   
   /* 📏 Consistent Spacing Scale */
   --space-xs: 0.25rem;    /* 4px */
@@ -303,6 +303,19 @@ body {
   line-height: 1;
 }
 
+/* Special styling for hero search form labels */
+.hero-search .form-label {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-search .form-label i {
+  color: #a78bfa;
+  font-size: 1rem;
+}
+
 .form-input {
   flex: 1;
   border-radius: var(--radius-md);
@@ -315,14 +328,38 @@ body {
   height: 2.5rem;
 }
 
+/* Special styling for hero search form inputs */
+.hero-search .form-input {
+  background: rgba(255, 255, 255, 0.98);
+  border: 2px solid rgba(167, 139, 250, 0.3);
+  color: #1a1a2e;
+  height: 3rem;
+  font-size: 0.9rem;
+}
+
+.hero-search .form-input:hover {
+  background: white;
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
 .form-input::placeholder {
   color: var(--muted-foreground);
+}
+
+.hero-search .form-input::placeholder {
+  color: #6b7280;
 }
 
 .form-input:focus {
   outline: none;
   border-color: var(--ring);
   box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+.hero-search .form-input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.25);
+  background: white;
 }
 
 .form-select {
@@ -332,6 +369,32 @@ body {
   background-position: right var(--space-3) center;
   background-size: 1rem;
   padding-right: var(--space-10);
+}
+
+/* Hero search button styling */
+.hero-search .btn-primary,
+.hero-search .btn-lg {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  font-weight: 600;
+  height: 3rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-search .btn-primary:hover,
+.hero-search .btn-lg:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+  color: white;
+}
+
+.hero-search .btn-primary i {
+  font-size: 1.1rem;
 }
 
 /* 🎴 Card Components */
@@ -486,7 +549,7 @@ body {
 /* 🚀 Hero Section */
 .hero {
   min-height: 100vh;
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #0a0a1f 0%, #1a1a3e 50%, #2d1b69 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -494,6 +557,7 @@ body {
   color: white;
   position: relative;
   overflow: hidden;
+  padding-top: 80px; /* Account for navbar */
 }
 
 .hero::before {
@@ -533,12 +597,13 @@ body {
 }
 
 .hero-search {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(20, 20, 40, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: var(--radius-2xl);
   padding: var(--space-6);
   margin-bottom: var(--space-8);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* 📱 Responsive Design */

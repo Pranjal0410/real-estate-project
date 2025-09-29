@@ -4,36 +4,36 @@
 
 /* 🔥 PROFESSIONAL REAL ESTATE PLATFORM - ULTRA MODERN DESIGN */
 :root {
-    /* Primary Brand Colors (Emerald + Teal) */
-    --primary: #10b981; /* emerald */
-    --primary-dark: #059669;
-    --primary-light: #34d399;
-    
+    /* Primary Brand Colors (Purple Theme) */
+    --primary: #8b5cf6; /* purple */
+    --primary-dark: #7c3aed;
+    --primary-light: #a78bfa;
+
     /* Accent Colors & Gradients */
-    --accent: #f97316; /* orange */
-    --accent-light: #fb923c;
-    --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #10b981 50%, #059669 100%);
-    --gradient-accent: linear-gradient(135deg, #f97316 0%, #f59e0b 100%);
-    --gradient-hero: linear-gradient(135deg, rgba(2, 6, 23, 0.85) 0%, rgba(15, 23, 42, 0.85) 40%, rgba(5, 150, 105, 0.55) 100%);
-    
-    /* Neutral/Dark Slate Colors */
+    --accent: #10b981; /* emerald for contrast */
+    --accent-light: #34d399;
+    --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gradient-hero: linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 62, 0.85) 40%, rgba(139, 92, 246, 0.3) 100%);
+
+    /* Neutral/Dark Slate Colors - Darker Theme */
     --white: #ffffff;
-    --gray-50: #0b1220; /* replaced for page background gradient */
-    --gray-100: #0f172a; /* slate-900 */
-    --gray-200: #1e293b; /* slate-800 */
-    --gray-300: #334155; /* slate-700 */
-    --gray-400: #475569; /* slate-600 */
-    --gray-500: #64748b; /* slate-500 */
-    --gray-600: #94a3b8; /* slate-400 */
-    --gray-700: #cbd5e1; /* slate-300 */
-    --gray-800: #e2e8f0; /* slate-200 */
-    --gray-900: #f1f5f9; /* slate-100 */
+    --gray-50: #0f0f23; /* darker background */
+    --gray-100: #1a1a3e; /* dark purple tint */
+    --gray-200: #1e1e32; /* card backgrounds */
+    --gray-300: #2d2d4a; /* borders */
+    --gray-400: #4a4a6a; /* muted text */
+    --gray-500: #6b6b8a; /* secondary text */
+    --gray-600: #94a3b8; /* text */
+    --gray-700: #cbd5e1; /* light text */
+    --gray-800: #e2e8f0; /* primary text */
+    --gray-900: #f1f5f9; /* white text */
     
     /* Status Colors */
     --success: #10b981;
     --warning: #f59e0b;
     --error: #ef4444;
-    --info: #06b6d4;
+    --info: #8b5cf6;
     
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -97,7 +97,7 @@ body {
     font-size: var(--text-base);
     line-height: 1.6;
     color: var(--gray-800);
-    background: linear-gradient(180deg, var(--gray-50) 0%, var(--gray-100) 100%);
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
     margin: 0;
     padding: 0;
 }
@@ -169,16 +169,16 @@ p {
 
 /* 🔥 ULTRA MODERN HORIZONTAL NAVBAR - ALWAYS HORIZONTAL */
 .navbar {
-    background: rgba(10, 14, 26, 0.95) !important;
+    background: rgba(15, 15, 35, 0.95) !important;
     backdrop-filter: blur(25px);
-    border-bottom: 1px solid rgba(148,163,184,0.15);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
     padding: var(--space-md) 0;
     transition: all var(--transition-normal);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 24px rgba(139, 92, 246, 0.1);
     display: flex !important;
     flex-wrap: nowrap !important;
 }
@@ -198,20 +198,20 @@ p {
 
 .nav-link-horizontal:hover {
     color: var(--primary) !important;
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(139, 92, 246, 0.1);
     transform: translateY(-1px);
 }
 
 .nav-link-horizontal.active {
     color: var(--primary) !important;
     font-weight: 600;
-    background: rgba(16, 185, 129, 0.15);
+    background: rgba(139, 92, 246, 0.15);
 }
 
 .navbar.scrolled {
     padding: var(--space-sm) 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    background: rgba(10, 14, 26, 0.98) !important;
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+    background: rgba(15, 15, 35, 0.98) !important;
 }
 
 .navbar-brand {
@@ -242,14 +242,14 @@ p {
 
 .navbar-nav .nav-link:hover {
     color: var(--primary) !important;
-    background: rgba(16, 185, 129, 0.08);
+    background: rgba(139, 92, 246, 0.08);
     transform: translateY(-1px);
 }
 
 .navbar-nav .nav-link.active {
     color: var(--primary) !important;
     font-weight: 600;
-    background: rgba(16, 185, 129, 0.12);
+    background: rgba(139, 92, 246, 0.12);
 }
 
 /* Horizontal Navbar - All Screen Sizes */
@@ -301,7 +301,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-hero), url('https://source.unsplash.com/1920x1080/?luxury,architecture,night-city') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 62, 0.85) 40%, rgba(139, 92, 246, 0.3) 100%), url('https://source.unsplash.com/1920x1080/?luxury,architecture,night-city') center/cover no-repeat;
     background-attachment: fixed;
     color: var(--white);
     overflow: hidden;
@@ -403,7 +403,7 @@ p {
 
 /* 🎯 IMPRESSIVE STATISTICS SECTION */
 .stats-section {
-    background: linear-gradient(135deg, rgba(2,6,23,1) 0%, rgba(15,23,42,1) 100%);
+    background: linear-gradient(135deg, rgba(15,15,35,1) 0%, rgba(26,26,62,1) 100%);
     padding: var(--space-5xl) 0;
     position: relative;
 }
@@ -417,13 +417,13 @@ p {
 }
 
 .stat-card {
-    background: rgba(2,6,23,0.6);
+    background: rgba(30,30,50,0.6);
     backdrop-filter: blur(8px);
     border-radius: var(--radius-2xl);
     padding: var(--space-2xl);
     text-align: center;
     box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(148,163,184,0.12);
+    border: 1px solid rgba(139,92,246,0.2);
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
@@ -480,7 +480,7 @@ p {
 /* 🏠 MODERN PROPERTY CARDS - 3 COLUMN GRID */
 .properties-section {
     padding: var(--space-5xl) 0;
-    background: linear-gradient(180deg, rgba(15,23,42,1) 0%, rgba(2,6,23,1) 100%);
+    background: linear-gradient(180deg, rgba(26,26,62,1) 0%, rgba(15,15,35,1) 100%);
 }
 
 /* Ensure proper grid layout for properties */
@@ -518,11 +518,11 @@ p {
 }
 
 .property-card {
-    background: rgba(2,6,23,0.6);
+    background: rgba(30,30,50,0.8);
     border-radius: var(--radius-2xl);
     overflow: hidden;
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(148,163,184,0.12);
+    border: 1px solid rgba(139,92,246,0.2);
     transition: all var(--transition-normal);
     height: 100%;
 }
@@ -621,13 +621,13 @@ p {
 }
 
 .feature-badge {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(139, 92, 246, 0.1);
     color: var(--primary);
     font-weight: 500;
     font-size: var(--text-sm);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-full);
-    border: 1px solid rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .btn-property {
@@ -653,16 +653,16 @@ p {
 /* 🌟 FEATURES SECTION */
 .features-section {
     padding: var(--space-5xl) 0;
-    background: linear-gradient(135deg, rgba(2,6,23,1) 0%, rgba(15,23,42,1) 50%, rgba(2,6,23,1) 100%);
+    background: linear-gradient(135deg, rgba(15,15,35,1) 0%, rgba(26,26,62,1) 50%, rgba(15,15,35,1) 100%);
 }
 
 .feature-card {
-    background: rgba(2,6,23,0.6);
+    background: rgba(30,30,50,0.6);
     border-radius: var(--radius-2xl);
     padding: var(--space-2xl);
     text-align: center;
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(148,163,184,0.12);
+    border: 1px solid rgba(139,92,246,0.2);
     transition: all var(--transition-normal);
     height: 100%;
 }
@@ -709,15 +709,15 @@ p {
 /* 💬 TESTIMONIALS SECTION */
 .testimonials-section {
     padding: var(--space-5xl) 0;
-    background: linear-gradient(180deg, rgba(2,6,23,1) 0%, rgba(15,23,42,1) 100%);
+    background: linear-gradient(180deg, rgba(15,15,35,1) 0%, rgba(26,26,62,1) 100%);
 }
 
 .testimonial-card {
-    background: rgba(2,6,23,0.6);
+    background: rgba(30,30,50,0.6);
     border-radius: var(--radius-2xl);
     padding: var(--space-2xl);
     box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(148,163,184,0.12);
+    border: 1px solid rgba(139,92,246,0.2);
     text-align: center;
     position: relative;
     transition: all var(--transition-normal);
@@ -815,7 +815,7 @@ p {
 
 /* 🌐 MODERN FOOTER */
 footer {
-    background: #0b1220;
+    background: #0f0f23;
     color: var(--gray-700);
     padding: var(--space-5xl) 0 var(--space-2xl);
 }
@@ -1099,7 +1099,7 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 14, 26, 0.95);
+    background: rgba(15, 15, 35, 0.95);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1110,7 +1110,7 @@ footer {
 .loading-spinner {
     width: 48px;
     height: 48px;
-    border: 3px solid rgba(16, 185, 129, 0.2);
+    border: 3px solid rgba(139, 92, 246, 0.2);
     border-top: 3px solid var(--primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -1123,12 +1123,12 @@ footer {
 
 /* 🔧 DARK THEME FORM ENHANCEMENTS */
 .form-control {
-    border: 2px solid var(--gray-300);
+    border: 2px solid rgba(139,92,246,0.2);
     border-radius: var(--radius-lg);
     padding: var(--space-md) var(--space-lg);
     font-size: var(--text-base);
     transition: all var(--transition-fast);
-    background: var(--gray-200);
+    background: rgba(255,255,255,0.05);
     color: var(--gray-800);
     box-shadow: var(--shadow-sm);
 }
@@ -1139,9 +1139,9 @@ footer {
 
 .form-control:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
     outline: none;
-    background: var(--gray-200);
+    background: rgba(139, 92, 246, 0.05);
     color: var(--gray-900);
 }
 
@@ -1170,7 +1170,7 @@ footer {
 .btn-primary {
     background: var(--gradient-primary);
     color: var(--white);
-    border-color: rgba(148,163,184,0.2);
+    border-color: rgba(139,92,246,0.2);
     box-shadow: var(--shadow-md);
 }
 
@@ -1260,19 +1260,19 @@ footer {
 
 /* Card dark theme enhancements */
 .card {
-    background: rgba(30, 41, 59, 0.8) !important;
-    border: 1px solid rgba(148,163,184,0.15) !important;
+    background: rgba(30, 30, 50, 0.8) !important;
+    border: 1px solid rgba(139,92,246,0.2) !important;
     color: var(--gray-800) !important;
 }
 
 .card-header {
-    background: rgba(15, 23, 42, 0.9) !important;
-    border-bottom: 1px solid rgba(148,163,184,0.15) !important;
+    background: rgba(15, 15, 35, 0.9) !important;
+    border-bottom: 1px solid rgba(139,92,246,0.2) !important;
     color: var(--gray-900) !important;
 }
 
 .card-body {
-    background: rgba(30, 41, 59, 0.6) !important;
+    background: rgba(30, 30, 50, 0.6) !important;
 }
 
 /* Table dark theme */
@@ -1288,17 +1288,17 @@ footer {
 
 /* Modal dark theme */
 .modal-content {
-    background: var(--gray-200) !important;
+    background: rgba(30, 30, 50, 0.95) !important;
     color: var(--gray-800) !important;
-    border: 1px solid rgba(148,163,184,0.15) !important;
+    border: 1px solid rgba(139,92,246,0.2) !important;
 }
 
 .modal-header {
-    border-bottom: 1px solid rgba(148,163,184,0.15) !important;
+    border-bottom: 1px solid rgba(139,92,246,0.2) !important;
 }
 
 .modal-footer {
-    border-top: 1px solid rgba(148,163,184,0.15) !important;
+    border-top: 1px solid rgba(139,92,246,0.2) !important;
 }
 
 /* 🌟 Additional responsive utilities */
@@ -1345,15 +1345,15 @@ footer {
 
 /* Dark theme for alerts and additional components */
 .alert {
-    background: rgba(30, 41, 59, 0.8) !important;
-    border: 1px solid rgba(148,163,184,0.15) !important;
+    background: rgba(30, 30, 50, 0.8) !important;
+    border: 1px solid rgba(139,92,246,0.2) !important;
     color: var(--gray-800) !important;
 }
 
 .alert-success {
     background: rgba(16, 185, 129, 0.15) !important;
     border-color: rgba(16, 185, 129, 0.3) !important;
-    color: var(--primary-light) !important;
+    color: #10b981 !important;
 }
 
 .alert-danger {
@@ -1376,8 +1376,8 @@ footer {
 
 /* Dropdown dark theme */
 .dropdown-menu {
-    background: var(--gray-200) !important;
-    border: 1px solid rgba(148,163,184,0.15) !important;
+    background: rgba(30, 30, 50, 0.95) !important;
+    border: 1px solid rgba(139,92,246,0.2) !important;
     box-shadow: var(--shadow-xl);
 }
 
@@ -1387,12 +1387,12 @@ footer {
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-    background: var(--gray-300) !important;
-    color: var(--gray-900) !important;
+    background: rgba(139, 92, 246, 0.1) !important;
+    color: var(--primary) !important;
 }
 
 .dropdown-divider {
-    border-color: rgba(148,163,184,0.15) !important;
+    border-color: rgba(139,92,246,0.2) !important;
 }
 
 /* 🦽 Accessibility: Reduced Motion */
@@ -1423,14 +1423,14 @@ footer {
 }
 
 .mega-dropdown .dropdown-header {
-    color: #dc2626;
+    color: #7c3aed;
     font-weight: 600;
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.75rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .mega-dropdown .dropdown-item {
@@ -1442,13 +1442,13 @@ footer {
 }
 
 .mega-dropdown .dropdown-item:hover {
-    background-color: #fef2f2;
-    color: #dc2626;
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
     transform: translateX(4px);
 }
 
 .mega-dropdown .dropdown-item i {
-    color: #dc2626;
+    color: #8b5cf6;
     width: 16px;
 }
 
@@ -1468,13 +1468,13 @@ footer {
 }
 
 .dropdown-item:hover {
-    background-color: #fef2f2;
-    color: #dc2626;
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
     transform: translateX(4px);
 }
 
 .dropdown-item i {
-    color: #dc2626;
+    color: #8b5cf6;
     width: 16px;
 }
 
@@ -1490,18 +1490,18 @@ footer {
 }
 
 .navbar-nav .nav-link:hover {
-    color: #dc2626 !important;
-    background: rgba(220, 38, 38, 0.05);
+    color: #8b5cf6 !important;
+    background: rgba(139, 92, 246, 0.05);
     transform: translateY(-1px);
 }
 
 .navbar-nav .nav-link.active {
-    color: #dc2626 !important;
+    color: #8b5cf6 !important;
     font-weight: 600;
-    background: rgba(220, 38, 38, 0.1);
+    background: rgba(139, 92, 246, 0.1);
 }
 
 .navbar-nav .nav-link.dropdown-toggle::after {
-    border-top: 0.3em solid #dc2626;
+    border-top: 0.3em solid #8b5cf6;
     margin-left: 0.5em;
 }

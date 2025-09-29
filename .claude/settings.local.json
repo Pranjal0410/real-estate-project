@@ -16,7 +16,10 @@
       "Bash(timeout:*)",
       "Bash(netstat:*)",
       "Bash(findstr:*)",
-      "Bash(cmd /c:*)"
+      "Bash(cmd /c:*)",
+      "Bash(git config:*)",
+      "Bash(mysql:*)",
+      "Bash(copy:*)"
     ],
     "deny": [],
     "ask": []

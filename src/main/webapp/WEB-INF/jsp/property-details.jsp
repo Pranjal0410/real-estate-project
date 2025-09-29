@@ -37,6 +37,7 @@
                             <div class="col-md-6">
                                 <div class="property-details">
                                     <h3 class="text-primary">₹<fmt:formatNumber value="${property.price / 100000}" pattern="##.##"/> Lakh</h3>
+                                <p class="text-muted">Downpayment: ₹<fmt:formatNumber value="${property.price * 0.2 / 100000}" pattern="##.##"/> Lakh (20%)</p>
 
                                     <div class="row mt-3">
                                         <div class="col-6">
@@ -102,34 +103,25 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Contact Owner</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Your Name</label>
-                                <input type="text" class="form-control" id="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" rows="3">I am interested in this property. Please contact me.</textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">
-                                <i class="bi bi-telephone me-2"></i>Contact Owner
-                            </button>
-                        </form>
+                        <h5>Quick Actions</h5>
+                        <div class="d-grid gap-2">
+                            <a href="https://rzp.io/rzp/H82EaBe" class="btn btn-success btn-lg">
+                                <i class="bi bi-currency-rupee me-2"></i>Pay Downpayment
+                            </a>
+                            <a href="https://wa.link/b748rr" class="btn btn-primary" target="_blank">
+                                <i class="bi bi-whatsapp me-2"></i>Contact Owner on WhatsApp
+                            </a>
+                        </div>
 
                         <hr>
 
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 mt-3">
                             <button class="btn btn-outline-primary">
                                 <i class="bi bi-heart me-2"></i>Add to Wishlist
                             </button>
-                            <button class="btn btn-outline-success">
+                            <a href="/emi-calculator" class="btn btn-outline-success">
                                 <i class="bi bi-calculator me-2"></i>Calculate EMI
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

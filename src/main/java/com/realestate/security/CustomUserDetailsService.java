@@ -32,27 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 });
 
         log.debug("User found: {}", username);
-        return createUserDetails(user);
-    }
-
-    private UserDetails createUserDetails(User user) {
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .authorities(getAuthorities(user))
-                .accountExpired(false)
-                .accountLocked(false)
-                .credentialsExpired(false)
-                .disabled(!user.isEnabled())
-                .build();
-    }
-
-    private Collection<? extends GrantedAuthority> getAuthorities(User user) {
-        User.UserRole userRole = user.getRole();
-        if (userRole == null) {
-            userRole = User.UserRole.INVESTOR;
-        }
-        String role = "ROLE_" + userRole.name();
-        return Collections.singletonList(new SimpleGrantedAuthority(role));
+        return new CustomUserDetails(user);
     }
 }

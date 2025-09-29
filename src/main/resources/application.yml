@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/realestate_db?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
     username: root
-    password: root  # change if your MySQL password is different
+    password: root  
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-timeout: 30000
@@ -13,7 +13,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create   # recreate tables and load data
+      ddl-auto: create   
     show-sql: false
     properties:
       hibernate:
@@ -39,8 +39,8 @@ spring:
   security:
     jwt:
       secret: mySecretKeyForJWTShouldBeVeryLongAndSecureAtLeast256BitsInProductionEnvironment2024
-      expiration: 86400000 # 24 hours
-      refresh-expiration: 604800000 # 7 days
+      expiration: 86400000 
+      refresh-expiration: 604800000 
   
   cache:
     type: caffeine
@@ -85,19 +85,43 @@ logging:
   file:
     name: logs/application.log
 
-# OpenAI Configuration
+
 openai:
   api:
     key: ${OPENAI_API_KEY:your-openai-api-key-here}
     model: gpt-3.5-turbo
     max-tokens: 150
 
-# Application specific configurations
+
 app:
   file:
     upload-dir: uploads/
   report:
     output-dir: reports/
+  frontend:
+    url: http://localhost:9090
+  email:
+    from: noreply@realestate.com
+
+# Razorpay Configuration
+razorpay:
+  key:
+    id: ${RAZORPAY_KEY_ID:rzp_test_XXXXXXXXXXX}
+    secret: ${RAZORPAY_KEY_SECRET:test_secret_XXXXXXXXXXX}
+
+# Mail Configuration for async notifications
+spring.mail:
+  host: smtp.gmail.com
+  port: 587
+  username: ${MAIL_USERNAME:your-email@gmail.com}
+  password: ${MAIL_PASSWORD:your-app-password}
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+          required: true
   async:
     core-pool-size: 5
     max-pool-size: 10

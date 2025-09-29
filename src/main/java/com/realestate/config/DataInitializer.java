@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class DataInitializer implements CommandLineRunner {
             User.builder()
                 .username("admin")
                 .email("admin@realestate.com")
-                .password(passwordEncoder.encode("admin123"))
+                .password(passwordEncoder.encode("password123"))
                 .firstName("Admin")
                 .lastName("User")
                 .phoneNumber("919876543210")
@@ -56,7 +58,7 @@ public class DataInitializer implements CommandLineRunner {
             User.builder()
                 .username("john_investor")
                 .email("john@example.com")
-                .password(passwordEncoder.encode("john123"))
+                .password(passwordEncoder.encode("password123"))
                 .firstName("John")
                 .lastName("Doe")
                 .phoneNumber("919876543211")
@@ -71,7 +73,7 @@ public class DataInitializer implements CommandLineRunner {
             User.builder()
                 .username("jane_owner")
                 .email("jane@example.com")
-                .password(passwordEncoder.encode("jane123"))
+                .password(passwordEncoder.encode("password123"))
                 .firstName("Jane")
                 .lastName("Smith")
                 .phoneNumber("919876543212")
@@ -97,36 +99,36 @@ public class DataInitializer implements CommandLineRunner {
 
         List<Property> properties = Arrays.asList(
             // Pune Properties (6)
-            createProperty("Premium 3BHK in Koregaon Park", "Luxurious 3BHK apartment in prestigious Koregaon Park with modern amenities", new BigDecimal("15000000"), "Koregaon Park, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1800"), 3, 2, 2020, owner),
-            createProperty("Spacious Villa in Baner", "Independent 4BHK villa with garden and parking in prime Baner location", new BigDecimal("25000000"), "Baner, Pune", "Pune", "Maharashtra", Property.PropertyType.VILLA, new BigDecimal("2500"), 4, 3, 2019, owner),
-            createProperty("Modern 2BHK in Hinjewadi", "Contemporary 2BHK flat in IT hub Hinjewadi with excellent amenities", new BigDecimal("8500000"), "Hinjewadi, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1200"), 2, 2, 2021, owner),
-            createProperty("Luxury Penthouse Wakad", "Exclusive penthouse with terrace garden in upscale Wakad area", new BigDecimal("35000000"), "Wakad, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("3000"), 4, 4, 2022, owner),
-            createProperty("Elegant 3BHK in Aundh", "Sophisticated 3BHK apartment in sought-after Aundh with premium facilities", new BigDecimal("18000000"), "Aundh, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1650"), 3, 3, 2021, owner),
-            createProperty("Heritage Bungalow Pune Cantonment", "Beautiful colonial-style bungalow in prestigious Pune Cantonment area", new BigDecimal("42000000"), "Pune Cantonment, Pune", "Pune", "Maharashtra", Property.PropertyType.RESIDENTIAL, new BigDecimal("3500"), 5, 4, 2015, owner),
+            createProperty("Premium 3BHK in Koregaon Park", "Luxurious 3BHK apartment in prestigious Koregaon Park with modern amenities", new BigDecimal("7500000"), "Koregaon Park, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1800"), 3, 2, 2020, owner),
+            createProperty("Spacious Villa in Baner", "Independent 4BHK villa with garden and parking in prime Baner location", new BigDecimal("11000000"), "Baner, Pune", "Pune", "Maharashtra", Property.PropertyType.VILLA, new BigDecimal("2500"), 4, 3, 2019, owner),
+            createProperty("Modern 2BHK in Hinjewadi", "Contemporary 2BHK flat in IT hub Hinjewadi with excellent amenities", new BigDecimal("5200000"), "Hinjewadi, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1200"), 2, 2, 2021, owner),
+            createProperty("Luxury Penthouse Wakad", "Exclusive penthouse with terrace garden in upscale Wakad area", new BigDecimal("12500000"), "Wakad, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("3000"), 4, 4, 2022, owner),
+            createProperty("Elegant 3BHK in Aundh", "Sophisticated 3BHK apartment in sought-after Aundh with premium facilities", new BigDecimal("8500000"), "Aundh, Pune", "Pune", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1650"), 3, 3, 2021, owner),
+            createProperty("Heritage Bungalow Pune Cantonment", "Beautiful colonial-style bungalow in prestigious Pune Cantonment area", new BigDecimal("12000000"), "Pune Cantonment, Pune", "Pune", "Maharashtra", Property.PropertyType.RESIDENTIAL, new BigDecimal("3500"), 5, 4, 2015, owner),
 
             // Mumbai Properties (6)
-            createProperty("Sea View 4BHK in Bandra West", "Luxurious sea-facing apartment in premium Bandra West with stunning Arabian Sea views", new BigDecimal("65000000"), "Bandra West, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("2200"), 4, 3, 2020, owner),
-            createProperty("Skyscraper Penthouse Lower Parel", "Ultra-modern penthouse in iconic Lower Parel tower with panoramic city views", new BigDecimal("95000000"), "Lower Parel, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("3800"), 4, 4, 2022, owner),
-            createProperty("Compact 2BHK in Andheri East", "Well-designed 2BHK apartment near metro and airport in buzzing Andheri East", new BigDecimal("22000000"), "Andheri East, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("950"), 2, 2, 2021, owner),
-            createProperty("Heritage Apartment in Fort", "Charming heritage apartment in historic Fort area with colonial architecture", new BigDecimal("38000000"), "Fort, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1650"), 3, 2, 2018, owner),
-            createProperty("Modern 3BHK in Powai", "Contemporary apartment in IT hub Powai with lake views and tech park proximity", new BigDecimal("28000000"), "Powai, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1450"), 3, 2, 2019, owner),
-            createProperty("Luxury Villa in Juhu", "Exclusive independent villa near Juhu Beach with private garden and pool", new BigDecimal("120000000"), "Juhu, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.VILLA, new BigDecimal("4500"), 5, 5, 2021, owner),
+            createProperty("Sea View 4BHK in Bandra West", "Luxurious sea-facing apartment in premium Bandra West with stunning Arabian Sea views", new BigDecimal("12500000"), "Bandra West, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("2200"), 4, 3, 2020, owner),
+            createProperty("Skyscraper Penthouse Lower Parel", "Ultra-modern penthouse in iconic Lower Parel tower with panoramic city views", new BigDecimal("12500000"), "Lower Parel, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("3800"), 4, 4, 2022, owner),
+            createProperty("Compact 2BHK in Andheri East", "Well-designed 2BHK apartment near metro and airport in buzzing Andheri East", new BigDecimal("6800000"), "Andheri East, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("950"), 2, 2, 2021, owner),
+            createProperty("Heritage Apartment in Fort", "Charming heritage apartment in historic Fort area with colonial architecture", new BigDecimal("9500000"), "Fort, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1650"), 3, 2, 2018, owner),
+            createProperty("Modern 3BHK in Powai", "Contemporary apartment in IT hub Powai with lake views and tech park proximity", new BigDecimal("8200000"), "Powai, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.APARTMENT, new BigDecimal("1450"), 3, 2, 2019, owner),
+            createProperty("Luxury Villa in Juhu", "Exclusive independent villa near Juhu Beach with private garden and pool", new BigDecimal("12500000"), "Juhu, Mumbai", "Mumbai", "Maharashtra", Property.PropertyType.VILLA, new BigDecimal("4500"), 5, 5, 2021, owner),
 
             // Delhi Properties (6)
-            createProperty("Elite Apartment in Connaught Place", "Premium 3BHK in central Delhi with excellent connectivity and amenities", new BigDecimal("28000000"), "Connaught Place, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("1900"), 3, 2, 2019, owner),
-            createProperty("Spacious Home in South Extension", "Large 4BHK independent house in upscale South Extension area", new BigDecimal("35000000"), "South Extension, Delhi", "Delhi", "Delhi", Property.PropertyType.RESIDENTIAL, new BigDecimal("2800"), 4, 3, 2016, owner),
-            createProperty("Modern Condo in Dwarka", "Contemporary 2BHK flat in well-planned Dwarka with metro connectivity", new BigDecimal("11000000"), "Dwarka, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("1300"), 2, 2, 2020, owner),
-            createProperty("Luxury Penthouse in Vasant Kunj", "Exclusive penthouse with panoramic views in premium Vasant Kunj", new BigDecimal("55000000"), "Vasant Kunj, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("3500"), 4, 4, 2022, owner),
-            createProperty("Commercial Space CP", "Prime commercial office space in the heart of Connaught Place", new BigDecimal("40000000"), "Connaught Place, Delhi", "Delhi", "Delhi", Property.PropertyType.COMMERCIAL, new BigDecimal("2000"), 0, 2, 2018, owner),
-            createProperty("Designer 3BHK in Greater Kailash", "Architect-designed luxury apartment in posh Greater Kailash with premium finishes", new BigDecimal("32000000"), "Greater Kailash, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("2100"), 3, 3, 2021, owner),
+            createProperty("Elite Apartment in Connaught Place", "Premium 3BHK in central Delhi with excellent connectivity and amenities", new BigDecimal("8900000"), "Connaught Place, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("1900"), 3, 2, 2019, owner),
+            createProperty("Spacious Home in South Extension", "Large 4BHK independent house in upscale South Extension area", new BigDecimal("10500000"), "South Extension, Delhi", "Delhi", "Delhi", Property.PropertyType.RESIDENTIAL, new BigDecimal("2800"), 4, 3, 2016, owner),
+            createProperty("Modern Condo in Dwarka", "Contemporary 2BHK flat in well-planned Dwarka with metro connectivity", new BigDecimal("5500000"), "Dwarka, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("1300"), 2, 2, 2020, owner),
+            createProperty("Luxury Penthouse in Vasant Kunj", "Exclusive penthouse with panoramic views in premium Vasant Kunj", new BigDecimal("12500000"), "Vasant Kunj, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("3500"), 4, 4, 2022, owner),
+            createProperty("Commercial Space CP", "Prime commercial office space in the heart of Connaught Place", new BigDecimal("11500000"), "Connaught Place, Delhi", "Delhi", "Delhi", Property.PropertyType.COMMERCIAL, new BigDecimal("2000"), 0, 2, 2018, owner),
+            createProperty("Designer 3BHK in Greater Kailash", "Architect-designed luxury apartment in posh Greater Kailash with premium finishes", new BigDecimal("9800000"), "Greater Kailash, Delhi", "Delhi", "Delhi", Property.PropertyType.APARTMENT, new BigDecimal("2100"), 3, 3, 2021, owner),
 
             // Bangalore Properties (6)
-            createProperty("IT Hub Apartment Whitefield", "Modern 3BHK apartment in IT corridor Whitefield with tech park proximity", new BigDecimal("16000000"), "Whitefield, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.APARTMENT, new BigDecimal("1700"), 3, 2, 2021, owner),
-            createProperty("Garden Villa in HSR Layout", "Beautiful villa with garden in family-friendly HSR Layout", new BigDecimal("32000000"), "HSR Layout, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.VILLA, new BigDecimal("2600"), 4, 3, 2019, owner),
-            createProperty("Startup Office in Koramangala", "Contemporary office space perfect for startups in vibrant Koramangala", new BigDecimal("22000000"), "Koramangala, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.OFFICE, new BigDecimal("1500"), 0, 3, 2020, owner),
-            createProperty("Luxury Flat in Brigade Road", "Premium 2BHK apartment in shopping district Brigade Road", new BigDecimal("18000000"), "Brigade Road, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.APARTMENT, new BigDecimal("1400"), 2, 2, 2022, owner),
-            createProperty("Tech Park Villa Electronic City", "Spacious villa near Electronic City tech parks with excellent connectivity", new BigDecimal("28000000"), "Electronic City, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.VILLA, new BigDecimal("2400"), 4, 3, 2020, owner),
-            createProperty("Premium 4BHK in Indiranagar", "Upscale 4BHK apartment in trendy Indiranagar with rooftop amenities", new BigDecimal("35000000"), "Indiranagar, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.APARTMENT, new BigDecimal("2300"), 4, 3, 2021, owner)
+            createProperty("IT Hub Apartment Whitefield", "Modern 3BHK apartment in IT corridor Whitefield with tech park proximity", new BigDecimal("7200000"), "Whitefield, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.APARTMENT, new BigDecimal("1700"), 3, 2, 2021, owner),
+            createProperty("Garden Villa in HSR Layout", "Beautiful villa with garden in family-friendly HSR Layout", new BigDecimal("10800000"), "HSR Layout, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.VILLA, new BigDecimal("2600"), 4, 3, 2019, owner),
+            createProperty("Startup Office in Koramangala", "Contemporary office space perfect for startups in vibrant Koramangala", new BigDecimal("8500000"), "Koramangala, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.OFFICE, new BigDecimal("1500"), 0, 3, 2020, owner),
+            createProperty("Luxury Flat in Brigade Road", "Premium 2BHK apartment in shopping district Brigade Road", new BigDecimal("6500000"), "Brigade Road, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.APARTMENT, new BigDecimal("1400"), 2, 2, 2022, owner),
+            createProperty("Tech Park Villa Electronic City", "Spacious villa near Electronic City tech parks with excellent connectivity", new BigDecimal("9200000"), "Electronic City, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.VILLA, new BigDecimal("2400"), 4, 3, 2020, owner),
+            createProperty("Premium 4BHK in Indiranagar", "Upscale 4BHK apartment in trendy Indiranagar with rooftop amenities", new BigDecimal("11200000"), "Indiranagar, Bangalore", "Bangalore", "Karnataka", Property.PropertyType.APARTMENT, new BigDecimal("2300"), 4, 3, 2021, owner)
         );
 
         propertyRepository.saveAll(properties);
@@ -159,8 +161,9 @@ public class DataInitializer implements CommandLineRunner {
             .viewCount(0L)
             .isFurnished(true)
             .hasGarden(type == Property.PropertyType.VILLA || type == Property.PropertyType.RESIDENTIAL)
-            .hasPool(price.compareTo(new BigDecimal("30000000")) > 0)
+            .hasPool(price.compareTo(new BigDecimal("10000000")) > 0)
             .hasGarage(true)
+            .imageUrls(generateImageUrls(title, city, type))
             .build();
     }
 
@@ -172,5 +175,35 @@ public class DataInitializer implements CommandLineRunner {
             case "bangalore": return "560001";
             default: return "000000";
         }
+    }
+
+    private Set<String> generateImageUrls(String title, String city, Property.PropertyType type) {
+        Set<String> images = new HashSet<>();
+
+        // Use title hashcode to generate consistent but unique images for each property
+        int seed = Math.abs(title.hashCode() % 10000);
+
+        // Add 3-5 different images using Lorem Picsum with unique seeds per property
+        images.add("https://picsum.photos/seed/" + seed + "/800/600");
+        images.add("https://picsum.photos/seed/" + (seed + 100) + "/800/600");
+        images.add("https://picsum.photos/seed/" + (seed + 200) + "/800/600");
+
+        // Add property type specific images
+        if (type == Property.PropertyType.VILLA || type == Property.PropertyType.RESIDENTIAL) {
+            images.add("https://picsum.photos/seed/" + (seed + 300) + "/800/600");
+            images.add("https://picsum.photos/seed/" + (seed + 400) + "/800/600");
+        }
+
+        if (type == Property.PropertyType.APARTMENT) {
+            images.add("https://picsum.photos/seed/" + (seed + 500) + "/800/600");
+            images.add("https://picsum.photos/seed/" + (seed + 600) + "/800/600");
+        }
+
+        if (type == Property.PropertyType.OFFICE || type == Property.PropertyType.COMMERCIAL) {
+            images.add("https://picsum.photos/seed/" + (seed + 700) + "/800/600");
+            images.add("https://picsum.photos/seed/" + (seed + 800) + "/800/600");
+        }
+
+        return images;
     }
 }

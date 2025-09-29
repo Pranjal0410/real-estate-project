@@ -81,11 +81,17 @@ public class SecurityConfig {
                 .requestMatchers("/api/properties/**").permitAll()
                 .requestMatchers("/api/investments/**").permitAll()
                 .requestMatchers("/api/chatbot/**").permitAll()
+                .requestMatchers("/api/razorpay/test-payment", "/api/razorpay/create-order", "/api/razorpay/verify-payment").permitAll()
+                .requestMatchers("/api/razorpay/payment-page", "/api/razorpay/property-payment/**").permitAll()
+                .requestMatchers("/api/razorpay/simple-payment", "/api/razorpay/create-payment-link", "/api/razorpay/payment-success").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
                 .requestMatchers("/WEB-INF/jsp/**").permitAll()
                 .requestMatchers("/login", "/register").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/payment/create-order", "/api/payment/verify", "/api/payment/history",
+                                "/api/payment/statistics", "/api/payment/**").hasRole("INVESTOR")
+                .requestMatchers("/investor/**").hasRole("INVESTOR")
                 .anyRequest().authenticated()
             );
 

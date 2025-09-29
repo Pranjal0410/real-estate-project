@@ -49,69 +49,195 @@
     <!-- Properties Section -->
     <section class="py-5" style="background: var(--background); padding-top: 140px;">
         <div class="container-center">
-            <!-- Search & Filter Bar -->
+            <!-- Enhanced Search & Filter Bar -->
             <div class="row mb-5">
                 <div class="col-12">
                     <div class="search-filter-card">
                         <div class="card-body">
-                            <h5 class="card-title">
-                                <i class="bi bi-funnel me-2" style="color: var(--primary);"></i>Find Your Perfect Property
-                            </h5>
-                            <form method="get" action="/properties" class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="location" class="form-label fw-semibold">Location</label>
-                                    <select class="form-select" id="location" name="location" onchange="this.form.submit()">
-                                        <option value="">All Cities</option>
-                                        <option value="pune" ${param.location == 'pune' ? 'selected' : ''}>Pune</option>
-                                        <option value="mumbai" ${param.location == 'mumbai' ? 'selected' : ''}>Mumbai</option>
-                                        <option value="delhi" ${param.location == 'delhi' ? 'selected' : ''}>Delhi</option>
-                                        <option value="bangalore" ${param.location == 'bangalore' ? 'selected' : ''}>Bangalore</option>
-                                    </select>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-funnel me-2" style="color: var(--primary);"></i>Find Your Perfect Property
+                                </h5>
+                                <c:if test="${hasFilters}">
+                                    <a href="/properties" class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-arrow-clockwise me-1"></i>Reset Filters
+                                    </a>
+                                </c:if>
+                            </div>
+
+                            <!-- Active Filters Display -->
+                            <c:if test="${hasFilters}">
+                                <div class="active-filters mb-3">
+                                    <small class="text-muted">Active filters:</small>
+                                    <div class="d-flex flex-wrap gap-2 mt-1">
+                                        <c:if test="${not empty selectedLocation}">
+                                            <span class="badge bg-primary">
+                                                Location: ${selectedLocation}
+                                                <a href="/properties?type=${selectedType}&minPrice=${selectedMinPrice}&maxPrice=${selectedMaxPrice}&bedrooms=${selectedBedrooms}&budget=${selectedBudget}"
+                                                   class="text-white ms-1" style="text-decoration: none;">×</a>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${not empty selectedType}">
+                                            <span class="badge bg-primary">
+                                                Type: ${selectedType}
+                                                <a href="/properties?location=${selectedLocation}&minPrice=${selectedMinPrice}&maxPrice=${selectedMaxPrice}&bedrooms=${selectedBedrooms}&budget=${selectedBudget}"
+                                                   class="text-white ms-1" style="text-decoration: none;">×</a>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${not empty selectedMinPrice}">
+                                            <span class="badge bg-primary">
+                                                Min Price: ₹<fmt:formatNumber value="${selectedMinPrice / 100000}" pattern="##.##"/>L
+                                                <a href="/properties?location=${selectedLocation}&type=${selectedType}&maxPrice=${selectedMaxPrice}&bedrooms=${selectedBedrooms}&budget=${selectedBudget}"
+                                                   class="text-white ms-1" style="text-decoration: none;">×</a>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${not empty selectedMaxPrice}">
+                                            <span class="badge bg-primary">
+                                                Max Price: ₹<fmt:formatNumber value="${selectedMaxPrice / 100000}" pattern="##.##"/>L
+                                                <a href="/properties?location=${selectedLocation}&type=${selectedType}&minPrice=${selectedMinPrice}&bedrooms=${selectedBedrooms}&budget=${selectedBudget}"
+                                                   class="text-white ms-1" style="text-decoration: none;">×</a>
+                                            </span>
+                                        </c:if>
+                                        <c:if test="${not empty selectedBedrooms}">
+                                            <span class="badge bg-primary">
+                                                Bedrooms: ${selectedBedrooms}+
+                                                <a href="/properties?location=${selectedLocation}&type=${selectedType}&minPrice=${selectedMinPrice}&maxPrice=${selectedMaxPrice}&budget=${selectedBudget}"
+                                                   class="text-white ms-1" style="text-decoration: none;">×</a>
+                                            </span>
+                                        </c:if>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="type" class="form-label fw-semibold">Type</label>
-                                    <select class="form-select" id="type" name="type">
-                                        <option value="">All Types</option>
-                                        <option value="HOUSE" ${param.type == 'HOUSE' ? 'selected' : ''}>House</option>
-                                        <option value="APARTMENT" ${param.type == 'APARTMENT' ? 'selected' : ''}>Apartment</option>
-                                        <option value="CONDO" ${param.type == 'CONDO' ? 'selected' : ''}>Condo</option>
-                                        <option value="VILLA" ${param.type == 'VILLA' ? 'selected' : ''}>Villa</option>
-                                    </select>
+                            </c:if>
+
+                            <form method="get" action="/properties" id="propertySearchForm">
+                                <div class="row g-3">
+                                    <!-- Location Filter -->
+                                    <div class="col-lg-3 col-md-6">
+                                        <label for="location" class="form-label fw-semibold">
+                                            <i class="bi bi-geo-alt me-1"></i>Location
+                                        </label>
+                                        <select class="form-select" id="location" name="location">
+                                            <option value="">All Cities</option>
+                                            <option value="pune" ${param.location == 'pune' ? 'selected' : ''}>Pune</option>
+                                            <option value="mumbai" ${param.location == 'mumbai' ? 'selected' : ''}>Mumbai</option>
+                                            <option value="delhi" ${param.location == 'delhi' ? 'selected' : ''}>Delhi</option>
+                                            <option value="bangalore" ${param.location == 'bangalore' ? 'selected' : ''}>Bangalore</option>
+                                            <option value="hyderabad" ${param.location == 'hyderabad' ? 'selected' : ''}>Hyderabad</option>
+                                            <option value="chennai" ${param.location == 'chennai' ? 'selected' : ''}>Chennai</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Property Type Filter -->
+                                    <div class="col-lg-2 col-md-6">
+                                        <label for="type" class="form-label fw-semibold">
+                                            <i class="bi bi-house me-1"></i>Type
+                                        </label>
+                                        <select class="form-select" id="type" name="type">
+                                            <option value="">All Types</option>
+                                            <option value="RESIDENTIAL" ${param.type == 'RESIDENTIAL' ? 'selected' : ''}>Residential</option>
+                                            <option value="COMMERCIAL" ${param.type == 'COMMERCIAL' ? 'selected' : ''}>Commercial</option>
+                                            <option value="APARTMENT" ${param.type == 'APARTMENT' ? 'selected' : ''}>Apartment</option>
+                                            <option value="VILLA" ${param.type == 'VILLA' ? 'selected' : ''}>Villa</option>
+                                            <option value="OFFICE" ${param.type == 'OFFICE' ? 'selected' : ''}>Office</option>
+                                            <option value="RETAIL" ${param.type == 'RETAIL' ? 'selected' : ''}>Retail</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Budget Range -->
+                                    <div class="col-lg-3 col-md-6">
+                                        <label for="budget" class="form-label fw-semibold">
+                                            <i class="bi bi-currency-rupee me-1"></i>Budget Range
+                                        </label>
+                                        <select class="form-select" id="budget" name="budget">
+                                            <option value="">Any Budget</option>
+                                            <option value="0-2500000" ${param.budget == '0-2500000' ? 'selected' : ''}>₹0 - ₹25L</option>
+                                            <option value="2500000-5000000" ${param.budget == '2500000-5000000' ? 'selected' : ''}>₹25L - ₹50L</option>
+                                            <option value="5000000-10000000" ${param.budget == '5000000-10000000' ? 'selected' : ''}>₹50L - ₹1Cr</option>
+                                            <option value="10000000-25000000" ${param.budget == '10000000-25000000' ? 'selected' : ''}>₹1Cr - ₹2.5Cr</option>
+                                            <option value="25000000-50000000" ${param.budget == '25000000-50000000' ? 'selected' : ''}>₹2.5Cr - ₹5Cr</option>
+                                            <option value="50000000-999999999" ${param.budget == '50000000-999999999' ? 'selected' : ''}>₹5Cr+</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Bedrooms -->
+                                    <div class="col-lg-2 col-md-6">
+                                        <label for="bedrooms" class="form-label fw-semibold">
+                                            <i class="bi bi-door-open me-1"></i>Bedrooms
+                                        </label>
+                                        <select class="form-select" id="bedrooms" name="bedrooms">
+                                            <option value="">Any</option>
+                                            <option value="1" ${param.bedrooms == '1' ? 'selected' : ''}>1+</option>
+                                            <option value="2" ${param.bedrooms == '2' ? 'selected' : ''}>2+</option>
+                                            <option value="3" ${param.bedrooms == '3' ? 'selected' : ''}>3+</option>
+                                            <option value="4" ${param.bedrooms == '4' ? 'selected' : ''}>4+</option>
+                                            <option value="5" ${param.bedrooms == '5' ? 'selected' : ''}>5+</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Search Button -->
+                                    <div class="col-lg-2 col-md-12 d-flex align-items-end">
+                                        <div class="d-grid w-100">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="bi bi-search me-1"></i>Search Properties
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="minPrice" class="form-label fw-semibold">Min Price</label>
-                                    <select class="form-select" id="minPrice" name="minPrice">
-                                        <option value="">Any</option>
-                                        <option value="100000" ${param.minPrice == '100000' ? 'selected' : ''}>$100K</option>
-                                        <option value="500000" ${param.minPrice == '500000' ? 'selected' : ''}>$500K</option>
-                                        <option value="1000000" ${param.minPrice == '1000000' ? 'selected' : ''}>$1M</option>
-                                        <option value="2000000" ${param.minPrice == '2000000' ? 'selected' : ''}>$2M</option>
-                                    </select>
+
+                                <!-- Advanced Filters Toggle -->
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-link p-0" data-bs-toggle="collapse"
+                                                data-bs-target="#advancedFilters" aria-expanded="false">
+                                            <i class="bi bi-chevron-down me-1"></i>Advanced Filters
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="maxPrice" class="form-label fw-semibold">Max Price</label>
-                                    <select class="form-select" id="maxPrice" name="maxPrice">
-                                        <option value="">Any</option>
-                                        <option value="500000" ${param.maxPrice == '500000' ? 'selected' : ''}>$500K</option>
-                                        <option value="1000000" ${param.maxPrice == '1000000' ? 'selected' : ''}>$1M</option>
-                                        <option value="2000000" ${param.maxPrice == '2000000' ? 'selected' : ''}>$2M</option>
-                                        <option value="5000000" ${param.maxPrice == '5000000' ? 'selected' : ''}>$5M</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="bedrooms" class="form-label fw-semibold">Bedrooms</label>
-                                    <select class="form-select" id="bedrooms" name="bedrooms">
-                                        <option value="">Any</option>
-                                        <option value="1" ${param.bedrooms == '1' ? 'selected' : ''}>1+</option>
-                                        <option value="2" ${param.bedrooms == '2' ? 'selected' : ''}>2+</option>
-                                        <option value="3" ${param.bedrooms == '3' ? 'selected' : ''}>3+</option>
-                                        <option value="4" ${param.bedrooms == '4' ? 'selected' : ''}>4+</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-1 d-flex align-items-end">
-                                    <button type="submit" class="btn btn-danger w-100">
-                                        <i class="bi bi-search"></i>
-                                    </button>
+
+                                <!-- Advanced Filters Collapsible Section -->
+                                <div class="collapse" id="advancedFilters">
+                                    <div class="row g-3 mt-2 pt-3 border-top">
+                                        <div class="col-md-3">
+                                            <label for="minPrice" class="form-label fw-semibold">Min Price (₹)</label>
+                                            <select class="form-select" id="minPrice" name="minPrice">
+                                                <option value="">Any</option>
+                                                <option value="1000000" ${param.minPrice == '1000000' ? 'selected' : ''}>₹10L</option>
+                                                <option value="2500000" ${param.minPrice == '2500000' ? 'selected' : ''}>₹25L</option>
+                                                <option value="5000000" ${param.minPrice == '5000000' ? 'selected' : ''}>₹50L</option>
+                                                <option value="10000000" ${param.minPrice == '10000000' ? 'selected' : ''}>₹1Cr</option>
+                                                <option value="25000000" ${param.minPrice == '25000000' ? 'selected' : ''}>₹2.5Cr</option>
+                                                <option value="50000000" ${param.minPrice == '50000000' ? 'selected' : ''}>₹5Cr</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="maxPrice" class="form-label fw-semibold">Max Price (₹)</label>
+                                            <select class="form-select" id="maxPrice" name="maxPrice">
+                                                <option value="">Any</option>
+                                                <option value="2500000" ${param.maxPrice == '2500000' ? 'selected' : ''}>₹25L</option>
+                                                <option value="5000000" ${param.maxPrice == '5000000' ? 'selected' : ''}>₹50L</option>
+                                                <option value="10000000" ${param.maxPrice == '10000000' ? 'selected' : ''}>₹1Cr</option>
+                                                <option value="25000000" ${param.maxPrice == '25000000' ? 'selected' : ''}>₹2.5Cr</option>
+                                                <option value="50000000" ${param.maxPrice == '50000000' ? 'selected' : ''}>₹5Cr</option>
+                                                <option value="100000000" ${param.maxPrice == '100000000' ? 'selected' : ''}>₹10Cr</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Quick Price Range</label>
+                                            <div class="d-flex gap-2">
+                                                <button type="button" class="btn btn-outline-primary btn-sm quick-budget" data-budget="0-2500000">Under ₹25L</button>
+                                                <button type="button" class="btn btn-outline-primary btn-sm quick-budget" data-budget="2500000-10000000">₹25L-1Cr</button>
+                                                <button type="button" class="btn btn-outline-primary btn-sm quick-budget" data-budget="10000000-999999999">₹1Cr+</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label fw-semibold">Actions</label>
+                                            <div class="d-grid">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="clearFilters()">
+                                                    <i class="bi bi-arrow-clockwise me-1"></i>Clear All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -229,6 +355,9 @@
                                                     <a href="/property/${property.id}" class="btn-view-details-professional">
                                                         <i class="bi bi-eye"></i>View Details
                                                     </a>
+                                                    <a href="https://rzp.io/rzp/H82EaBe" class="btn btn-success btn-sm">
+                                                        <i class="bi bi-currency-rupee"></i>Pay Downpayment
+                                                    </a>
                                                     <button class="btn-contact-professional" onclick="contactOwner(${property.id})">
                                                         <i class="bi bi-telephone"></i>Contact
                                                     </button>
@@ -316,7 +445,7 @@
         function contactOwner(propertyId) {
             alert('Contact Owner functionality for Property ID: ' + propertyId + '\n\nThis would open contact form or show owner details.');
         }
-        
+
         function toggleFavorite(propertyId) {
             const heartIcon = event.target.closest('button').querySelector('i');
             if (heartIcon.classList.contains('bi-heart')) {
@@ -326,6 +455,84 @@
                 heartIcon.classList.remove('bi-heart-fill', 'text-danger');
                 heartIcon.classList.add('bi-heart');
             }
+        }
+
+        // Enhanced Filter Functions
+        function clearFilters() {
+            window.location.href = '/properties';
+        }
+
+        // Quick budget selection
+        document.querySelectorAll('.quick-budget').forEach(button => {
+            button.addEventListener('click', function() {
+                const budget = this.getAttribute('data-budget');
+                document.getElementById('budget').value = budget;
+
+                // Update visual state
+                document.querySelectorAll('.quick-budget').forEach(btn => btn.classList.remove('btn-primary'));
+                document.querySelectorAll('.quick-budget').forEach(btn => btn.classList.add('btn-outline-primary'));
+                this.classList.remove('btn-outline-primary');
+                this.classList.add('btn-primary');
+
+                // Auto-submit form
+                document.getElementById('propertySearchForm').submit();
+            });
+        });
+
+        // Auto-submit on filter change (optional - can be enabled/disabled)
+        function enableAutoSubmit() {
+            const form = document.getElementById('propertySearchForm');
+            const selects = form.querySelectorAll('select');
+
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    // Add small delay to allow user to see the change
+                    setTimeout(() => {
+                        form.submit();
+                    }, 300);
+                });
+            });
+        }
+
+        // Advanced filters toggle icon rotation
+        document.querySelector('[data-bs-target="#advancedFilters"]').addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('bi-chevron-down')) {
+                icon.classList.remove('bi-chevron-down');
+                icon.classList.add('bi-chevron-up');
+            } else {
+                icon.classList.remove('bi-chevron-up');
+                icon.classList.add('bi-chevron-down');
+            }
+        });
+
+        // Initialize enhanced filters
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight active quick budget button
+            const currentBudget = new URLSearchParams(window.location.search).get('budget');
+            if (currentBudget) {
+                document.querySelectorAll('.quick-budget').forEach(button => {
+                    if (button.getAttribute('data-budget') === currentBudget) {
+                        button.classList.remove('btn-outline-primary');
+                        button.classList.add('btn-primary');
+                    }
+                });
+            }
+
+            // Optional: Enable auto-submit (uncomment if desired)
+            // enableAutoSubmit();
+        });
+
+        // Mobile-friendly filter enhancements
+        function toggleMobileFilters() {
+            const filtersCard = document.querySelector('.search-filter-card');
+            filtersCard.classList.toggle('mobile-expanded');
+        }
+
+        // Add responsive behavior for mobile
+        if (window.innerWidth <= 768) {
+            // Add mobile-specific enhancements
+            document.querySelector('.search-filter-card').classList.add('mobile-optimized');
         }
     </script>
 </body>

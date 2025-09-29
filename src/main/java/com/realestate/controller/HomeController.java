@@ -38,9 +38,21 @@ public class HomeController {
                            @RequestParam(required = false) Boolean featured) {
 
         try {
-            if (location != null && !location.isEmpty()) {
-                log.info("Searching properties by location: {}", location);
-                model.addAttribute("properties", propertyService.findByLocation(location));
+            // Check if any filters are applied
+            boolean hasFilters = (location != null && !location.isEmpty()) ||
+                               (type != null && !type.isEmpty()) ||
+                               (minPrice != null && !minPrice.isEmpty()) ||
+                               (maxPrice != null && !maxPrice.isEmpty()) ||
+                               (bedrooms != null && !bedrooms.isEmpty()) ||
+                               (budget != null && !budget.isEmpty());
+
+            if (hasFilters) {
+                log.info("Searching properties with filters - location: {}, type: {}, minPrice: {}, maxPrice: {}, bedrooms: {}, budget: {}",
+                        location, type, minPrice, maxPrice, bedrooms, budget);
+
+                // Build search DTO
+                var searchDTO = buildSearchDTO(location, type, minPrice, maxPrice, bedrooms, budget);
+                model.addAttribute("properties", propertyService.searchProperties(searchDTO));
             } else if (featured != null && featured) {
                 log.info("Fetching featured properties");
                 model.addAttribute("properties", propertyService.getTopProperties(6));
@@ -49,9 +61,15 @@ public class HomeController {
                 model.addAttribute("properties", propertyService.findAll());
             }
 
+            // Add model attributes for form state
             model.addAttribute("propertyTypes", propertyService.getPropertyCountByType());
             model.addAttribute("selectedLocation", location);
             model.addAttribute("selectedType", type);
+            model.addAttribute("selectedMinPrice", minPrice);
+            model.addAttribute("selectedMaxPrice", maxPrice);
+            model.addAttribute("selectedBedrooms", bedrooms);
+            model.addAttribute("selectedBudget", budget);
+            model.addAttribute("hasFilters", hasFilters);
 
             return "properties";
         } catch (Exception e) {
@@ -60,6 +78,67 @@ public class HomeController {
             model.addAttribute("error", "Error loading properties. Showing all available properties.");
             return "properties";
         }
+    }
+
+    private com.realestate.model.dto.PropertySearchDTO buildSearchDTO(String location, String type,
+                                                                     String minPrice, String maxPrice,
+                                                                     String bedrooms, String budget) {
+        var searchDTO = com.realestate.model.dto.PropertySearchDTO.builder();
+
+        // Location filter
+        if (location != null && !location.isEmpty()) {
+            searchDTO.location(location);
+        }
+
+        // Property type filter
+        if (type != null && !type.isEmpty()) {
+            try {
+                searchDTO.propertyType(com.realestate.model.dto.PropertySearchDTO.PropertyType.valueOf(type.toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                log.warn("Invalid property type: {}", type);
+            }
+        }
+
+        // Price range filters
+        if (minPrice != null && !minPrice.isEmpty()) {
+            try {
+                searchDTO.minPrice(new java.math.BigDecimal(minPrice));
+            } catch (NumberFormatException e) {
+                log.warn("Invalid min price: {}", minPrice);
+            }
+        }
+
+        if (maxPrice != null && !maxPrice.isEmpty()) {
+            try {
+                searchDTO.maxPrice(new java.math.BigDecimal(maxPrice));
+            } catch (NumberFormatException e) {
+                log.warn("Invalid max price: {}", maxPrice);
+            }
+        }
+
+        // Budget filter (parse range like "0-2500000")
+        if (budget != null && !budget.isEmpty() && budget.contains("-")) {
+            try {
+                String[] range = budget.split("-");
+                if (range.length == 2) {
+                    searchDTO.minPrice(new java.math.BigDecimal(range[0]));
+                    searchDTO.maxPrice(new java.math.BigDecimal(range[1]));
+                }
+            } catch (NumberFormatException e) {
+                log.warn("Invalid budget range: {}", budget);
+            }
+        }
+
+        // Bedrooms filter
+        if (bedrooms != null && !bedrooms.isEmpty()) {
+            try {
+                searchDTO.minBedrooms(Integer.parseInt(bedrooms));
+            } catch (NumberFormatException e) {
+                log.warn("Invalid bedrooms: {}", bedrooms);
+            }
+        }
+
+        return searchDTO.build();
     }
 
     @GetMapping("/property/{id}")

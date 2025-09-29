@@ -16,7 +16,7 @@
     
     <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/global.css" rel="stylesheet">
+    <link href="/css/gl     obal.css" rel="stylesheet">
     <link href="/css/magicbricks-exact.css" rel="stylesheet">
     
     <!-- Google Fonts -->

@@ -62,6 +62,6 @@ public class UserDTO {
     private LocalDateTime updatedAt;
 
     public enum UserRole {
-        ADMIN, INVESTOR, PROPERTY_OWNER, AGENT
+        ADMIN, INVESTOR, PROPERTY_OWNER, AGENT, ANALYST
     }
 }

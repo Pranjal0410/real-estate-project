@@ -1,5 +1,6 @@
 package com.realestate.security;
 
+import com.realestate.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
+    private final TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -33,6 +35,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwt = getJwtFromRequest(request);
 
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+                if (!jwtTokenProvider.isAccessToken(jwt)) {
+                    log.warn("Attempted to use non-access token for authentication");
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
+                String jti = jwtTokenProvider.getJtiFromToken(jwt);
+                if (tokenService.isTokenBlacklisted(jti)) {
+                    log.warn("Attempted to use blacklisted token: {}", jti);
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
                 String username = jwtTokenProvider.getUsernameFromToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -56,16 +71,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        
+
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
-        
+
         String tokenParam = request.getParameter("token");
         if (StringUtils.hasText(tokenParam)) {
             return tokenParam;
         }
-        
+
         return null;
     }
 }

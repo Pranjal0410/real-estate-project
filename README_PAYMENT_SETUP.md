@@ -10,6 +10,7 @@ Your Real Estate Investment Platform now has Razorpay payment gateway integrated
 - **Email**: `propinvestbuy@gmail.com`
 - **App Name**: PropInvest
 
+
 ## 🚀 Quick Start
 
 ### 1. Start the Application

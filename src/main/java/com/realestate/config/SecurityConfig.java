@@ -5,10 +5,11 @@ import com.realestate.security.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,7 +27,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
+@EnableMethodSecurity(
         prePostEnabled = true,
         securedEnabled = true,
         jsr250Enabled = true)
@@ -75,6 +76,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/")
                 .permitAll())
             .authorizeHttpRequests(auth -> auth
+                // Public endpoints
                 .requestMatchers("/", "/home", "/about", "/contact", "/properties", "/property/**", "/propeties").permitAll()
                 .requestMatchers("/calculator", "/chatbot", "/emi-calculator").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
@@ -87,11 +89,24 @@ public class SecurityConfig {
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
                 .requestMatchers("/WEB-INF/jsp/**").permitAll()
                 .requestMatchers("/login", "/register").permitAll()
+
+                // Admin endpoints
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/portfolios/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/transactions/admin/**").hasRole("ADMIN")
+
+                // Analyst endpoints (read-only)
+                .requestMatchers(HttpMethod.GET, "/api/portfolios/**").hasAnyRole("INVESTOR", "ADMIN", "ANALYST")
+                .requestMatchers(HttpMethod.GET, "/api/transactions/**").hasAnyRole("INVESTOR", "ADMIN", "ANALYST")
+
+                // Investor endpoints
+                .requestMatchers("/api/portfolios/**").hasAnyRole("INVESTOR", "ADMIN")
+                .requestMatchers("/api/transactions/**").hasAnyRole("INVESTOR", "ADMIN")
                 .requestMatchers("/api/payment/create-order", "/api/payment/verify", "/api/payment/history",
                                 "/api/payment/statistics", "/api/payment/**").hasRole("INVESTOR")
                 .requestMatchers("/investor/**").hasRole("INVESTOR")
+
                 .anyRequest().authenticated()
             );
 
@@ -108,7 +123,7 @@ public class SecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(false);
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

@@ -19,7 +19,20 @@
       "Bash(cmd /c:*)",
       "Bash(git config:*)",
       "Bash(mysql:*)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(/usr/local/bin/mvn:*)",
+      "Bash(/opt/homebrew/bin/mvn:*)",
+      "Bash(./mvnw test:*)",
+      "Bash(brew:*)",
+      "Bash(/opt/homebrew/bin/brew:*)",
+      "Bash(/usr/local/bin/brew:*)",
+      "Bash(/usr/bin/java:*)",
+      "Bash(docker:*)",
+      "Bash(/opt/homebrew/bin/mysql:*)",
+      "Bash(/usr/local/bin/mysql:*)",
+      "Bash(./mvnw clean install:*)",
+      "Bash(./mvnw spring-boot:run:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []

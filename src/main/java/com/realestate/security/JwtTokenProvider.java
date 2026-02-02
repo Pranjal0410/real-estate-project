@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Component
@@ -25,6 +26,12 @@ public class JwtTokenProvider {
     @Value("${jwt.expiration:86400000}")
     private long jwtExpiration;
 
+    @Value("${spring.security.jwt.access-expiration:900000}")
+    private long accessTokenExpiration;
+
+    @Value("${spring.security.jwt.refresh-expiration:604800000}")
+    private long refreshTokenExpiration;
+
     private SecretKey getSigningKey() {
         byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -32,21 +39,39 @@ public class JwtTokenProvider {
 
     public String generateToken(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return generateToken(userDetails.getUsername());
+        return generateAccessToken(userDetails.getUsername());
     }
 
     public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+        return generateAccessToken(username);
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    public String generateAccessToken(String username) {
+        return createToken(username, "access", accessTokenExpiration);
+    }
+
+    public String generateRefreshToken(String username, String familyId) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("type", "refresh");
+        claims.put("familyId", familyId);
+        return createTokenWithClaims(claims, username, refreshTokenExpiration);
+    }
+
+    private String createToken(String subject, String tokenType, long expiration) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("type", tokenType);
+        return createTokenWithClaims(claims, subject, expiration);
+    }
+
+    private String createTokenWithClaims(Map<String, Object> claims, String subject, long expiration) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpiration);
+        Date expiryDate = new Date(now.getTime() + expiration);
+        String jti = UUID.randomUUID().toString();
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
+                .setId(jti)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -55,6 +80,20 @@ public class JwtTokenProvider {
 
     public String getUsernameFromToken(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public String getJtiFromToken(String token) {
+        return extractClaim(token, Claims::getId);
+    }
+
+    public String getTokenType(String token) {
+        Claims claims = extractAllClaims(token);
+        return (String) claims.get("type");
+    }
+
+    public String getFamilyId(String token) {
+        Claims claims = extractAllClaims(token);
+        return (String) claims.get("familyId");
     }
 
     public Date getExpirationDateFromToken(String token) {
@@ -95,6 +134,24 @@ public class JwtTokenProvider {
         return false;
     }
 
+    public boolean isAccessToken(String token) {
+        try {
+            String type = getTokenType(token);
+            return "access".equals(type);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isRefreshToken(String token) {
+        try {
+            String type = getTokenType(token);
+            return "refresh".equals(type);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean isTokenExpired(String token) {
         return getExpirationDateFromToken(token).before(new Date());
     }
@@ -102,8 +159,16 @@ public class JwtTokenProvider {
     public String refreshToken(String token) {
         if (validateToken(token) && !isTokenExpired(token)) {
             String username = getUsernameFromToken(token);
-            return generateToken(username);
+            return generateAccessToken(username);
         }
         return null;
+    }
+
+    public long getAccessTokenExpirationMs() {
+        return accessTokenExpiration;
+    }
+
+    public long getRefreshTokenExpirationMs() {
+        return refreshTokenExpiration;
     }
 }

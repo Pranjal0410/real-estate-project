@@ -130,6 +130,6 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     public enum UserRole {
-        ADMIN, INVESTOR, PROPERTY_OWNER, AGENT
+        ADMIN, INVESTOR, PROPERTY_OWNER, AGENT, ANALYST
     }
 }
